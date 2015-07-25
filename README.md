@@ -16,10 +16,17 @@ python -c "import django; print(django.get_version())"
 * Create database 'monk' in mysql
 * Run "python manage.py migrate"
 
+## Run python webserver
+* Run "python manage.py runserver"
+" Check http://127.0.0.1:8000
+
 # MySQL
 ## Create DB and user
 mysql -u root -p
+
  > CREATE DATABASE monk;
+
  > CREATE USER 'monk'@'localhost';
+
  > GRANT ALL ON monk.* TO 'monk'@'localhost';
 
