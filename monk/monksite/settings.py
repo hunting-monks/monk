@@ -82,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'monk',
-        'USERNAME': 'monk',
+        'USER': 'monk'
     }
 }
 
@@ -102,7 +102,7 @@ USE_TZ = True
 
 LANGUAGES = ( 
     ('en', u'English'), 
-    ('zh-cn', u'简体中文'),  # instead of 'zh-CN' 
+    ('zh-hans', u'简体中文'),  # instead of 'zh-CN' 
     ('zh-tw', u'繁體中文'),  # instead of 'zh-TW' 
 ) 
 LANGUAGE_COOKIE_NAME = 'django_language' 
