@@ -43,6 +43,7 @@ INSTALLED_APPS = (
 
     # main app
     'interview_track',
+    'company',
     'monksite',
 
     'registration',

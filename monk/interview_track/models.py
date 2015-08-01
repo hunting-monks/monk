@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.fields.related import ForeignKey
+from company.models import Company
+
 
 # Create your models here.
-
 INDUSTRY_CATEGORIES = (
     (1, 'Accounting'),
     (2, 'Computer Hardware'),
@@ -59,32 +59,6 @@ INTERVIEW_STATUS = (
     (5, 'Rejected'))
 
 
-class Company(models.Model):
-    name = models.CharField(verbose_name='Company Name', max_length=200)
-    businessDescription = models.CharField(verbose_name='Business Description', max_length=20, blank=True)
-    area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    address = models.CharField(verbose_name='Address', max_length=50, blank=True)
-    address2 = models.CharField(max_length=50)
-    zipcode = models.CharField(verbose_name='Zip', max_length=10)
-    city = models.CharField(verbose_name='City', max_length=50)
-    province = models.CharField(verbose_name='Province', max_length=20)
-    state = models.CharField(verbose_name='State', max_length=2, blank=True)
-    deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-
-class Role(models.Model):
-
-    name = models.CharField(max_length=30)
-    permission = models.BigIntegerField()
-    mask = models.BigIntegerField(choices=ROLE_ENUM)
-    deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
 
 class Job(models.Model):
         
@@ -103,17 +77,6 @@ class Job(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
-class UserDetail(models.Model):
-        
-    user_id = models.ForeignKey(User)
-    company_id = models.ForeignKey(Company)
-    role_id = models.ForeignKey(Role)
-    phone = models.CharField(max_length=20)
-    deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
 
 class Applicant(models.Model):
         
@@ -175,7 +138,7 @@ class ApplicateCase(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
 
-class  Interview(models.Model):
+class Interview(models.Model):
 
     case_id = models.ForeignKey(ApplicateCase)
     interviewer_id = models.ForeignKey(User)
@@ -198,5 +161,3 @@ class InterviewScore(models.Model):
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
-    
