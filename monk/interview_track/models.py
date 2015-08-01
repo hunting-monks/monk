@@ -60,16 +60,17 @@ INTERVIEW_STATUS = (
 
 
 class Company(models.Model):
-        
-    name = models.CharField(max_length=200)
+    name = models.CharField(verbose_name='Company Name', max_length=200)
+    businessDescription = models.CharField(verbose_name='Business Description', max_length=20, blank=True)
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    address = models.CharField(max_length=50)
+    address = models.CharField(verbose_name='Address', mmax_length=50, blank=True)
     address2 = models.CharField(max_length=50)
-    zipcode = models.CharField(max_length=10)
-    city = models.CharField(max_length=50)
-    province = models.CharField(max_length=20)
+    zipcode = models.CharField(verbose_name='Zip', max_length=10)
+    city = models.CharField(verbose_name='City', max_length=50)
+    province = models.CharField(verbose_name='Province', max_length=20)
+    state = models.CharField(verbose_name='State', max_length=2, blank=True)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
