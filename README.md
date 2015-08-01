@@ -8,6 +8,15 @@ Run script/install_unbuntu.sh to install all packages needed.
 Run "pip install -r scripts/pymodules" to install python packages
 
 # Quick Start
+0. install basic applications
+	brew install mysql
+
+	brew install node
+
+	ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+
+	ln -sfv /usr/local/opt/node/*.plist ~/Library/LaunchAgents
+
 1. Create a virtualenv dir
 
 	virtualenv monkproject
@@ -57,7 +66,8 @@ mysql -u root -p
 
 	CREATE DATABASE monk;
 
-	CREATE USER 'monk'@'localhost';
+	CREATE USER 'monk'@'localhost' IDENTIFIED BY 'monk';
 
-	GRANT ALL ON monk.* TO 'monk'@'localhost';
+	GRANT ALL PRIVILEGES ON * . * TO 'monk'@'localhost'; FLUSH PRIVILEGES;
+
 
