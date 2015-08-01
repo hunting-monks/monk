@@ -65,7 +65,7 @@ class Company(models.Model):
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    address = models.CharField(verbose_name='Address', mmax_length=50, blank=True)
+    address = models.CharField(verbose_name='Address', max_length=50, blank=True)
     address2 = models.CharField(max_length=50)
     zipcode = models.CharField(verbose_name='Zip', max_length=10)
     city = models.CharField(verbose_name='City', max_length=50)

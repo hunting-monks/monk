@@ -35,11 +35,15 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
+    'registration',
+
+    # main app
     'interview_track'
 )
 
@@ -82,7 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'monk',
-        'USER': 'monk'
+        'USER': 'monk',
+        'PASSWORD': 'monk',
     }
 }
 
@@ -112,3 +117,9 @@ LANGUAGE_COOKIE_NAME = 'django_language'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Registration related
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+
