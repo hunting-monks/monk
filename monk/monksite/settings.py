@@ -17,7 +17,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -29,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -41,10 +41,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'registration',
-
     # main app
-    'interview_track'
+    'interview_track',
+    'monksite',
+
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -60,10 +61,19 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'monksite.urls'
 
+TEMPLATE_DIRS = (
+	os.path.join(BASE_DIR, "templates", ),
+)
+
+TEMPLATE_LOADERS = (
+	'django.template.loaders.filesystem.Loader',
+	#'django.template.loaders.app_directories.Loader',
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': TEMPLATE_DIRS,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,6 +130,7 @@ STATIC_URL = '/static/'
 
 
 # Registration related
+REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
 
