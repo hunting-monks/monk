@@ -95,9 +95,6 @@ class Company(models.Model):
     administrators = models.ManyToManyField(User, related_name='companies')
     administrator = models.OneToOneField(User, related_name='company')
 
-    class Meta:
-        model = Company
-
 
 class Role(models.Model):
 

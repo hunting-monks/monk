@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from company.models import Company
-
+from company.models import Company, Applicant
 
 # Create your models here.
 INDUSTRY_CATEGORIES = (
@@ -73,57 +72,6 @@ class Job(models.Model):
     recruiter_id = models.ForeignKey(User, related_name="recruiter")
     hiring_manager_id = models.ForeignKey(User, related_name="hm")
     expire_date = models.DateField()
-    deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
-class Applicant(models.Model):
-        
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
-    level = models.IntegerField(choices=SKILL_LEVEL)
-    expected_salary = models.IntegerField()
-    current_salary = models.IntegerField()
-    resume_path = models.CharField(max_length=100)
-    
-    current_company = models.CharField(max_length=200)
-    current_title = models.CharField(max_length=50)
-    current_start_date = models.DateField()
-    current_end_date = models.DateField()
-    
-    prev_company1 = models.CharField(max_length=200)
-    prev_title1 = models.CharField(max_length=50)
-    prev_start_date1 = models.DateField()
-    prev_end_date1 = models.DateField()
-    
-    prev_company2 = models.CharField(max_length=200)
-    prev_title2 = models.CharField(max_length=50)
-    prev_start_date2 = models.DateField()
-    prev_end_date2 = models.DateField()
-    
-    prev_company3 = models.CharField(max_length=200)
-    prev_title3 = models.CharField(max_length=50)
-    prev_start_date3 = models.DateField()
-    prev_end_date3 = models.DateField()    
-    
-    graduate_school = models.CharField(max_length=50)
-    degree = models.CharField(max_length=10)
-    graduate_date = models.DateField()
-    
-    graduate_school2 = models.CharField(max_length=50)
-    degree2 = models.CharField(max_length=10)
-    graduate_date2 = models.DateField()
-    
-    graduate_school3 = models.CharField(max_length=50)
-    degree3 = models.CharField(max_length=10)
-    graduate_date3 = models.DateField()
-    
-    source = models.IntegerField(choices=APPLICANT_SOURCE)
-    source_id =models.BigIntegerField(default=0)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
