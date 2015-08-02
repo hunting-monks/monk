@@ -1,4 +1,12 @@
 
+------------------------------------------------------------------------------------------------------------
+install the following tools:
+
+* Brew
+* Xcode
+* python 2.7
+* Git
+
 
 ------------------------------------------------------------------------------------------------------------
 1. Download fakeSMTP
@@ -6,8 +14,16 @@
 2. sudo java -jar /Users/zdan/workspace/tools/fakeSMTP-2.0.jar -s -o /tmp
 
 
+------------------------------------------------------------------------------------------------------------
 
 
+npm install -g ember-cli
+
+npm install -g bower
+
+
+install Ember Inspector:
+Go to the Ember Inspector Github site and install one of the extensions for Chrome
 
 
 ------------------------------------------------------------------------------------------------------------
