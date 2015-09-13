@@ -63,12 +63,12 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'monksite.urls'
 
 TEMPLATE_DIRS = (
-	os.path.join(BASE_DIR, "templates", ),
+	os.path.join(BASE_DIR, "templates",),
 )
 
 TEMPLATE_LOADERS = (
 	'django.template.loaders.filesystem.Loader',
-	#'django.template.loaders.app_directories.Loader',
+	# 'django.template.loaders.app_directories.Loader',
 )
 
 TEMPLATES = [
@@ -116,22 +116,26 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = ( 
-    ('en', u'English'), 
-    ('zh-hans', u'简体中文'),  # instead of 'zh-CN' 
-    ('zh-tw', u'繁體中文'),  # instead of 'zh-TW' 
-) 
-LANGUAGE_COOKIE_NAME = 'django_language' 
+LANGUAGES = (
+    ('en', u'English'),
+    ('zh-hans', u'简体中文'),  # instead of 'zh-CN'
+    ('zh-tw', u'繁體中文'),  # instead of 'zh-TW'
+)
+LANGUAGE_COOKIE_NAME = 'django_language'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 STATIC_URL = '/static/'
 
 
 # Registration related
 REGISTRATION_OPEN = True
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 
