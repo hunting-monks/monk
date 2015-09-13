@@ -45,7 +45,8 @@ INSTALLED_APPS = (
     'interview_track',
     'company',
     'monksite',
-
+    # third party apps
+    'django_extensions',
     'registration',
 )
 
@@ -89,6 +90,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'monksite.wsgi.application'
 
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

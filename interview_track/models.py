@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
 from company.models import Company, Applicant
+from django.db.models.fields.related import ForeignKey
 
 # Create your models here.
+
 INDUSTRY_CATEGORIES = (
     (1, 'Accounting'),
     (2, 'Computer Hardware'),
@@ -12,9 +14,9 @@ INDUSTRY_CATEGORIES = (
 
 ROLE_ENUM = (
     (1, 'Admin'),
-    (1<<2, 'Interviewer'),
-    (1<<3, 'HR'),
-    (1<<4, 'Hiring Manager'))
+    (1 << 2, 'Interviewer'),
+    (1 << 3, 'HR'),
+    (1 << 4, 'Hiring Manager'))
 
 
 SKILL_LEVEL = (
@@ -57,10 +59,8 @@ INTERVIEW_STATUS = (
     (4, 'Passed'),
     (5, 'Rejected'))
 
-
-
 class Job(models.Model):
-        
+
     company_id = models.ForeignKey(Company)
     title = models.CharField(max_length=50)
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
@@ -78,13 +78,13 @@ class Job(models.Model):
 
 
 class ApplicateCase(models.Model):
-        
+
     applicant_id = models.ForeignKey(Applicant)
     job_id = models.ForeignKey(Job)
     status = models.IntegerField(choices=APPLICATION_STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
 
 class Interview(models.Model):
 
@@ -101,7 +101,7 @@ class Interview(models.Model):
 
 
 class InterviewScore(models.Model):
-    
+
     interview_id = models.ForeignKey(Interview)
     evaluated_field = models.CharField(max_length=50)
     score = models.IntegerField()
@@ -109,3 +109,4 @@ class InterviewScore(models.Model):
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
