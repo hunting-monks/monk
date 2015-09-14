@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from datetime import datetime
+
 # Create your models here.
 
 INDUSTRY_CATEGORIES = (
@@ -12,9 +14,9 @@ INDUSTRY_CATEGORIES = (
 
 ROLE_ENUM = (
     (1, 'Admin'),
-    (1<<2, 'Interviewer'),
-    (1<<3, 'HR'),
-    (1<<4, 'Hiring Manager'))
+    (1 << 2, 'Interviewer'),
+    (1 << 3, 'HR'),
+    (1 << 4, 'Hiring Manager'))
 
 
 SKILL_LEVEL = (
@@ -107,7 +109,7 @@ class Role(models.Model):
 
 
 class UserDetail(models.Model):
-        
+
     user_id = models.ForeignKey(User)
     company_id = models.ForeignKey(Company)
     role_id = models.ForeignKey(Role)
@@ -115,7 +117,7 @@ class UserDetail(models.Model):
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
 
 class Employee(models.Model):
 
@@ -156,59 +158,59 @@ class Employee(models.Model):
 
 class Applicant(models.Model):
 
-    user = models.OneToOneField(User, null=True)
+    user = models.OneToOneField(User, null=True, default=0)
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
     email = models.CharField(max_length=254, blank=True, db_index=True)
-    middleInitial = models.CharField(max_length=1, blank=True)
-    address = models.CharField(max_length=100, blank=True)
-    address2 = models.CharField(max_length=100, blank=True)
+    middleInitial = models.CharField(max_length=1, blank=True, default="")
+    address = models.CharField(max_length=100, blank=True, default="")
+    address2 = models.CharField(max_length=100, blank=True, default="")
     city = models.CharField(max_length=35, blank=True)
-    state = models.CharField(max_length=2, null=True)
-    zip = models.CharField(max_length=10, blank=True)
-    phone = models.CharField(max_length=25, blank=True)
+    state = models.CharField(max_length=2, blank=True, default="")
+    zip = models.CharField(max_length=10, blank=True, default="")
+    phone = models.CharField(max_length=25, blank=True, default="")
 
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
     level = models.IntegerField(choices=SKILL_LEVEL)
     expected_salary = models.IntegerField()
     current_salary = models.IntegerField()
     resume_path = models.CharField(max_length=100)
-    
+
     current_company = models.CharField(max_length=200)
     current_title = models.CharField(max_length=50)
     current_start_date = models.DateField()
     current_end_date = models.DateField()
-    
-    prev_company1 = models.CharField(max_length=200)
-    prev_title1 = models.CharField(max_length=50)
-    prev_start_date1 = models.DateField()
-    prev_end_date1 = models.DateField()
-    
-    prev_company2 = models.CharField(max_length=200)
-    prev_title2 = models.CharField(max_length=50)
-    prev_start_date2 = models.DateField()
-    prev_end_date2 = models.DateField()
-    
-    prev_company3 = models.CharField(max_length=200)
-    prev_title3 = models.CharField(max_length=50)
-    prev_start_date3 = models.DateField()
-    prev_end_date3 = models.DateField()    
-    
+
+    prev_company1 = models.CharField(max_length=200, blank=True, default="")
+    prev_title1 = models.CharField(max_length=50, blank=True, default="")
+    prev_start_date1 = models.DateField(blank=True, default=datetime.min)
+    prev_end_date1 = models.DateField(blank=True, default=datetime.min)
+
+    prev_company2 = models.CharField(max_length=200, blank=True, default="")
+    prev_title2 = models.CharField(max_length=50, blank=True, default="")
+    prev_start_date2 = models.DateField(blank=True, default=datetime.min)
+    prev_end_date2 = models.DateField(blank=True, default=datetime.min)
+
+    prev_company3 = models.CharField(max_length=200, blank=True, default="")
+    prev_title3 = models.CharField(max_length=50, blank=True, default="")
+    prev_start_date3 = models.DateField(blank=True, default=datetime.min)
+    prev_end_date3 = models.DateField(blank=True, default=datetime.min)
+
     graduate_school = models.CharField(max_length=50)
     degree = models.CharField(max_length=10)
     graduate_date = models.DateField()
-    
-    graduate_school2 = models.CharField(max_length=50)
-    degree2 = models.CharField(max_length=10)
-    graduate_date2 = models.DateField()
-    
-    graduate_school3 = models.CharField(max_length=50)
-    degree3 = models.CharField(max_length=10)
-    graduate_date3 = models.DateField()
-    
+
+    graduate_school2 = models.CharField(max_length=50, blank=True, default="")
+    degree2 = models.CharField(max_length=10, blank=True, default="")
+    graduate_date2 = models.DateField(blank=True, default=datetime.min)
+
+    graduate_school3 = models.CharField(max_length=50, blank=True, default="")
+    degree3 = models.CharField(max_length=10, blank=True, default="")
+    graduate_date3 = models.DateField(blank=True, default=datetime.min)
+
     source = models.IntegerField(choices=APPLICANT_SOURCE)
-    source_id =models.BigIntegerField(default=0)
+    source_id = models.BigIntegerField(default=0)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

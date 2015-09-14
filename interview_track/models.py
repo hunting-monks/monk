@@ -59,6 +59,7 @@ INTERVIEW_STATUS = (
     (4, 'Passed'),
     (5, 'Rejected'))
 
+
 class Job(models.Model):
 
     company_id = models.ForeignKey(Company)
