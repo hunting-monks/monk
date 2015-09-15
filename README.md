@@ -31,7 +31,12 @@ Run "pip install -r scripts/pymodules" to install python packages
 
 	python manage.py migrate
 
-4. Bringup webserver
+4. Generate Chinese translation file
+
+   	export DJANGO_SETTINGS_MODULE=monksite.settings
+   	django-admin compilemessages
+
+5. Bringup webserver
 
 	python manage.py runserver
 

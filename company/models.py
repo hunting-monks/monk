@@ -158,7 +158,7 @@ class Employee(models.Model):
 
 class Applicant(models.Model):
 
-    user = models.OneToOneField(User, null=True, default=0)
+    user = models.OneToOneField(User, default=0, related_name="user")
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
@@ -215,4 +215,6 @@ class Applicant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
+    created_by_user = models.OneToOneField(User, related_name="author")
+    # redundant info, help filtering
+    created_by_company = models.OneToOneField(Company, default=0)
