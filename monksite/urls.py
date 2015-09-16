@@ -16,9 +16,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from views import home_view
+from views import static_view
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^accounts/logout', 'django.contrib.auth.views.logout',
+        {'next_page': '/accounts/login'},
+        name="logout"),
     url(r'^accounts/', include('registration.backends.default.urls')),
+
     url(r'^user/', include("company.urls")),
-    url(r'^', include("interview_track.urls")),
+    url(r'^$', home_view, name='home'),
+    url(r'^(?P<page>.+\.html)$', static_view.as_view())
 ]
