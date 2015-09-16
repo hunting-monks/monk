@@ -9,9 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 from django.conf import settings
 
+
 def home_view(request, action=None):
     return render_to_response(
-                'index.html',
+                'recruiter_home.html',
                 {'title': 'testtest'},
                 context_instance=RequestContext(request))
 

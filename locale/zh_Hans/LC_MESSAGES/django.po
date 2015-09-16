@@ -255,13 +255,6 @@ msgstr ""
 msgid "Register for an account"
 msgstr ""
 
-#: monksite/templates/registration/registration_form.html:10
-msgid "Submit"
-msgstr "提交"
-
-msgid "View Candidates"
-msgstr "查看所有候选人"
-
 msgid "Add Candidates"
 msgstr "添加候选人"
 
@@ -273,3 +266,12 @@ msgstr "添加面试官"
 
 msgid "Prepare an offer"
 msgstr "准备offer"
+
+msgid "Read All Messages"
+msgstr "查看所有消息"
+
+msgid "Submit"
+msgstr "提交"
+
+msgid "View Candidates"
+msgstr "查看所有候选人"
