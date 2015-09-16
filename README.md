@@ -1,11 +1,13 @@
-# monk
-hunting HR V1
+# monk hunting HR V1
 
-# Prerequsites
+Prerequsites
+=================
+Run the following to install all packages needed.
 
-Run script/install_unbuntu.sh to install all packages needed.
-
-Run "pip install -r scripts/pymodules" to install python packages
+```
+script/install_unbuntu.sh
+pip install -r scripts/pymodules
+```
 
 # Quick Start
 0. install basic applications
