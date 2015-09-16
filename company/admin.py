@@ -7,10 +7,16 @@ from models import Applicant
 
 
 class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'businessDescription', 'area')
+    list_display_links = ('name',)
+    ordering = ['name', ]
     pass
 
 
 class EmployeeAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'company')
+    list_display_links = ('first_name',)
+    ordering = ['first_name', 'last_name']
     pass
 
 

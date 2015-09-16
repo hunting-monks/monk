@@ -9,7 +9,7 @@ def candidate_list(request, action=None):
     if request.user.is_authenticated():
         company = Employee.objects.get(user=request.user.id)
         candidates = applicant.get_applicants(company_id=company.company)
-    return render_to_response(
+        return render_to_response(
                 'recruiter_home.html',
                 {'candidates': candidates},
                 context_instance=RequestContext(request))

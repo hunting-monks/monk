@@ -77,8 +77,8 @@ MARITAL_CHOICES = (
     ('M', 'Married'),
 )
 
-class Company(models.Model):
 
+class Company(models.Model):
     name = models.CharField(verbose_name='Company Name', max_length=200)
     businessDescription = models.CharField(verbose_name='Business Description', max_length=20, blank=True)
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
@@ -96,6 +96,9 @@ class Company(models.Model):
 
     administrators = models.ManyToManyField(User, related_name='companies')
     administrator = models.OneToOneField(User, related_name='company')
+
+    def __unicode__(self):
+        return self.name
 
 
 class Role(models.Model):
@@ -132,33 +135,32 @@ class Employee(models.Model):
     address = models.CharField(max_length=100, blank=True)
     address2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=35, blank=True)
-    state = models.CharField(max_length=2, null=True)
+    state = models.CharField(max_length=2, blank=True, default="")
     zip = models.CharField(max_length=10, blank=True)
     phone = models.CharField(max_length=25, blank=True)
 
     # shenfenzheng or ssn
-    socialId = models.CharField(max_length=128, null=True, blank=True)
-    dob = models.CharField(max_length=10, null=True, blank=True)
-    sex = models.CharField(max_length=1, choices=SEX_CHOICES, blank=True)
+    socialId = models.CharField(max_length=128, blank=True, default="")
+    dob = models.CharField(max_length=10, blank=True, default="")
+    sex = models.IntegerField(choices=SEX_CHOICES, blank=True)
     marital_status = models.CharField(max_length=2, verbose_name="Marital Status", choices=MARITAL_CHOICES, null=True, blank=True)
-    isDisabled = models.NullBooleanField(verbose_name="Is Disabled?")
-    ageRange = models.CharField(max_length=8, null=True, blank=True)  # Used for manually entered employees only.
-    title = models.CharField(max_length=254, null=True, blank=True)
-    department = models.CharField(max_length=128, null=True)
-    reportToEmployee = models.ForeignKey('company.Employee', related_name='subordinates', null=True, on_delete=models.SET_NULL)
+    isDisabled = models.BooleanField(verbose_name="Is Disabled?", default=False)
+    ageRange = models.CharField(max_length=8, blank=True, default="")  # Used for manually entered employees only.
+    title = models.CharField(max_length=254, blank=True, default="")
+    department = models.CharField(max_length=128, default="")
 
     status = models.CharField(max_length=3, choices=EE_STATUS_CHOICES)  # Active, LOA, Terminated
-    photoUrl = models.CharField(max_length=255, null=True)
+    photoUrl = models.CharField(max_length=255, blank=True, default="")
 
     class Meta:
         unique_together = (
-            ("socialId", "company")
+            ("user",)
         )
 
 
 class Applicant(models.Model):
 
-    user = models.OneToOneField(User, default=0, related_name="user")
+    user = models.OneToOneField(User, related_name="user", blank=True, null=True)
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
@@ -217,4 +219,4 @@ class Applicant(models.Model):
 
     created_by_user = models.OneToOneField(User, related_name="author")
     # redundant info, help filtering
-    created_by_company = models.OneToOneField(Company, default=0)
+    created_by_company = models.OneToOneField(Company, blank=True, null=True)
