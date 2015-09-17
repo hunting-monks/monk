@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static from staticfiles %}
 
 {% block title %}{% trans "Log in" %}{% endblock %}
 {% spaceless %}
+
+{% block style %}
+    <style>
+        html {
+            background: url("{% static 'images/bg.jpg' %}") no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
 
