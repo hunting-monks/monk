@@ -82,7 +82,7 @@ class Company(models.Model):
     name = models.CharField(verbose_name='Company Name', max_length=200)
     businessDescription = models.CharField(verbose_name='Business Description', max_length=20, blank=True)
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
-    email = models.EmailField()
+    email = models.EmailField(blank=True)
     phone = models.CharField(max_length=20)
     address = models.CharField(verbose_name='Address', max_length=50, blank=True)
     address2 = models.CharField(max_length=50, blank=True)
@@ -123,6 +123,10 @@ class UserDetail(models.Model):
 
 
 class Employee(models.Model):
+    class Meta:
+        unique_together = (
+            ("user",)
+        )
 
     user = models.OneToOneField(User, null=True)
 
@@ -152,10 +156,8 @@ class Employee(models.Model):
     status = models.CharField(max_length=3, choices=EE_STATUS_CHOICES)  # Active, LOA, Terminated
     photoUrl = models.CharField(max_length=255, blank=True, default="")
 
-    class Meta:
-        unique_together = (
-            ("user",)
-        )
+    def __unicode__(self):
+        return self.first_name + ' ' + self.last_name + ' ' + self.company.name
 
 
 class Applicant(models.Model):
@@ -164,7 +166,7 @@ class Applicant(models.Model):
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
-    email = models.CharField(max_length=254, blank=True, db_index=True)
+    email = models.EmailField(blank=True, db_index=True)
     middleInitial = models.CharField(max_length=1, blank=True, default="")
     address = models.CharField(max_length=100, blank=True, default="")
     address2 = models.CharField(max_length=100, blank=True, default="")
@@ -217,6 +219,4 @@ class Applicant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    created_by_user = models.OneToOneField(User, related_name="author")
-    # redundant info, help filtering
-    created_by_company = models.OneToOneField(Company, blank=True, null=True)
+    created_by = models.ForeignKey(Employee, related_name="author")

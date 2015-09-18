@@ -11,10 +11,7 @@ from django.views.generic import TemplateView
 
 def home_view(request, action=None):
     if request.user.is_authenticated():
-        return render_to_response(
-                'recruiter_home.html',
-                {'title': 'testtest'},
-                context_instance=RequestContext(request))
+        return redirect('/users/candidate_list')
     else:
         return redirect('/accounts/login')
 

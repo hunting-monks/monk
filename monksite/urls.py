@@ -27,7 +27,7 @@ urlpatterns = [
         name="logout"),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
-    url(r'^user/', include("company.urls")),
+    url(r'^users/', include("company.urls")),
     url(r'^$', home_view, name='home'),
     url(r'^(?P<page>.+\.html)$', static_view.as_view())
 ]
