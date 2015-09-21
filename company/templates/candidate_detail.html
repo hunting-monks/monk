@@ -1,0 +1,117 @@
+{% extends "base.html"%}
+{% load i18n %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% spaceless %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload.css' %}">
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload-ui.css' %}">
+{% endblock %}
+
+{% block navbar %}
+    {% include "navbar_recruiter.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrapper">
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#profile" data-toggle="tab">{% trans "Profile" %}</a>
+                            </li>
+                            <li><a href="#scorecards" data-toggle="tab">{% trans "Scorecards" %}</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="profile">
+                                <h2>{{candi.last_name}} {{candi.first_name}}</h2>
+                                <h4>{% trans "Experience" %}</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        {{candi.current_title}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        {{candi.current_company}}
+                                    </div>
+                                </div>
+                                <h4>{% trans "Education" %}</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        {{candi.degree}} {{candi.graduate_school}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        {{candi.graduate_date}}
+                                    </div>
+                                </div>
+                                <a class="btn btn-success" href="{{candi.resume}}">{% trans "View Resume" %}</a>
+                            </div>
+                            <div class="tab-pane fade" id="scorecards">
+                                <h4>Profile Tab</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+{% endblock %}
+
+{% block foot_scripts_bak %}
+
+<script src="{% static 'jQuery-File-Upload/js/vendor/jquery.ui.widget.js' %}"></script>
+<script src="{% static 'jQuery-File-Upload/js/jquery.iframe-transport.js' %}"></script>
+<script src="{% static 'jQuery-File-Upload/js/jquery.fileupload.js' %}"></script>
+<script src="{% static 'jQuery-File-Upload/js/jquery.cookie.js' %}"></script>
+<script>
+/*jslint unparam: true */
+/*global window, $ */
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url = '/users/add_candidates';
+    var csrftoken = $.cookie('csrftoken');
+    $('#fileupload').fileupload({
+        url: url,
+        crossDomain: false,
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo('#files');
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+</script>
+
+{% endblock %}
+{% endspaceless %}

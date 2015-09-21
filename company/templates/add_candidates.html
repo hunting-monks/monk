@@ -1,0 +1,116 @@
+{% extends "base.html"%}
+{% load i18n %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% spaceless %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload.css' %}">
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.11.4/jquery-ui.min.css' %}">
+{% endblock %}
+{% block extra_js %}
+    <script>
+        $(function() {
+            $("#id_graduate_date").datepicker();
+        });
+    </script>
+{% endblock %}
+
+{% block navbar %}
+    {% include "navbar_recruiter.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% trans "Add candidate" %}</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form action="/users/add_candidates" method="post"  enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <p>{{ form.non_field_errors }}</p>
+                                    <p>{{ form.errors }}</p>
+                                    <div class="form-group">
+                                        <input class="form-control" id="id_last_name" maxlength="50" name="last_name" type="text" placeholder='{% trans "Last name" %}' />
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="id_first_name" maxlength="50" name="first_name" type="text" placeholder='{% trans "First name" %}' />
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="id_current_company" maxlength="50" name="current_company" type="text" placeholder='{% trans "Current company" %}' />
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="id_current_title" maxlength="50" name="current_title" type="text" placeholder='{% trans "Current title" %}' />
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="id_graduate_school" maxlength="50" name="graduate_school" type="text" placeholder='{% trans "Graduate chool" %}' />
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" id="id_graduate_date" maxlength="50" name="graduate_date" type="text" placeholder='{% trans "Graduate date" %}' />
+                                    </div>
+                                    <input type='hidden' id='id_created_by' name='created_by' value="{{ request.user.id}}" />
+                                    <div class="form-group">
+                                        <select class="form-control" id="id_degree" name="degree">
+                                            <option value selected="selected">{% trans "Latest degree" %}</option>
+                                            <option value="0">{% trans "Unknown" %}</option>
+                                            <option value="1">{% trans "Below BS" %}</option>
+                                            <option value="2">{% trans "BS" %}</option>
+                                            <option value="3">{% trans "MS" %}</option>
+                                            <option value="4">{% trans "Doctor" %}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="id_source" name="source">
+                                            <option value selected="selected">{% trans "Source" %}</option>
+                                            <option value="0">{% trans "Unknown" %}</option>
+                                            <option value="1">{% trans "Internal referral" %}</option>
+                                            <option value="2">{% trans "Self submitted" %}</option>
+                                            <option value="3">{% trans "Linkedin" %}</option>
+                                        </select>
+                                    </div>
+                                    <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>{% trans "Add photo" %}</span>
+                                        <input id="fileupload" type="file" name="photo" multiple>
+                                    </span>
+                                    
+                                    <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>{% trans "Add resume" %}</span>
+                                        <input id="id_resume" type="file" name="resume" multiple>
+                                    </span>
+                                        <input type="submit" value="Submit" class="btn" />
+                                    </form>
+                                
+
+                                {% thumbnail candidate.photo "100x100" crop="center" as im %}
+                                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                {% endthumbnail %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+{% endblock %}
+
+{% block foot_scripts %}
+
+{% endblock %}
+
+{% endspaceless %}

@@ -17,10 +17,9 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            {% include "candidate_panel.html" %}
-            {% include "candidate_panel.html" %}
-            {% include "candidate_panel.html" %}
-            {% include "candidate_panel.html" %}
+        {% for c in candidates %}
+            {% include "candidate_panel.html" with candidate=c %}
+        {% endfor %}
         </div>
     </div>
     <!-- /#page-wrapper -->

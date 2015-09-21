@@ -6,6 +6,7 @@ from datetime import datetime
 # Create your models here.
 
 INDUSTRY_CATEGORIES = (
+    (0, 'Unknown'),
     (1, 'Accounting'),
     (2, 'Computer Hardware'),
     (3, 'Computer Software'),
@@ -13,6 +14,7 @@ INDUSTRY_CATEGORIES = (
 
 
 ROLE_ENUM = (
+    (0, 'Unknown'),
     (1, 'Admin'),
     (1 << 2, 'Interviewer'),
     (1 << 3, 'HR'),
@@ -20,6 +22,7 @@ ROLE_ENUM = (
 
 
 SKILL_LEVEL = (
+    (0, 'Unknown'),
     (1, 'Entry'),
     (2, 'Junior'),
     (3, 'Senior'),
@@ -29,6 +32,7 @@ SKILL_LEVEL = (
 
 
 APPLICANT_SOURCE = (
+    (0, 'Unknown'),
     (1, 'Internal referral'),
     (2, 'Self submitted'),
     (3, 'Linkedin'))
@@ -61,6 +65,7 @@ INTERVIEW_STATUS = (
 
 
 SEX_CHOICES = (
+    (0, 'U'),
     (1, 'M'),
     (2, 'F'),
 )
@@ -73,9 +78,17 @@ EE_STATUS_CHOICES = (
 )
 
 MARITAL_CHOICES = (
+    ('U', 'Unknown'),
     ('S', 'Single'),
     ('M', 'Married'),
 )
+
+DEGREE_CHOICES = (
+    (0, 'Unknown'),
+    (1, 'Below BS'),
+    (2, 'BS'),
+    (3, 'MS'),
+    (4, 'PHD'))
 
 
 class Company(models.Model):
@@ -174,17 +187,18 @@ class Applicant(models.Model):
     state = models.CharField(max_length=2, blank=True, default="")
     zip = models.CharField(max_length=10, blank=True, default="")
     phone = models.CharField(max_length=25, blank=True, default="")
+    photo = models.ImageField(upload_to='avartars/', blank=True, default="")
 
-    area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
-    level = models.IntegerField(choices=SKILL_LEVEL)
-    expected_salary = models.IntegerField()
-    current_salary = models.IntegerField()
-    resume_path = models.CharField(max_length=100)
+    area = models.IntegerField(choices=INDUSTRY_CATEGORIES, blank=True, default=0)
+    level = models.IntegerField(choices=SKILL_LEVEL, blank=True, default=0)
+    expected_salary = models.IntegerField(blank=True, default=0)
+    current_salary = models.IntegerField(blank=True, default=0)
+    resume = models.FileField(upload_to='resumes/', blank=True, default="")
 
     current_company = models.CharField(max_length=200)
     current_title = models.CharField(max_length=50)
-    current_start_date = models.DateField()
-    current_end_date = models.DateField()
+    current_start_date = models.DateField(blank=True, default=datetime.min)
+    current_end_date = models.DateField(blank=True, default=datetime.min)
 
     prev_company1 = models.CharField(max_length=200, blank=True, default="")
     prev_title1 = models.CharField(max_length=50, blank=True, default="")
@@ -202,15 +216,15 @@ class Applicant(models.Model):
     prev_end_date3 = models.DateField(blank=True, default=datetime.min)
 
     graduate_school = models.CharField(max_length=50)
-    degree = models.CharField(max_length=10)
-    graduate_date = models.DateField()
+    degree = models.IntegerField(choices=DEGREE_CHOICES)
+    graduate_date = models.DateField(blank=True, default=datetime.min)
 
     graduate_school2 = models.CharField(max_length=50, blank=True, default="")
-    degree2 = models.CharField(max_length=10, blank=True, default="")
+    degree2 = models.IntegerField(choices=DEGREE_CHOICES, default=0)
     graduate_date2 = models.DateField(blank=True, default=datetime.min)
 
     graduate_school3 = models.CharField(max_length=50, blank=True, default="")
-    degree3 = models.CharField(max_length=10, blank=True, default="")
+    degree3 = models.IntegerField(choices=DEGREE_CHOICES, default=0)
     graduate_date3 = models.DateField(blank=True, default=datetime.min)
 
     source = models.IntegerField(choices=APPLICANT_SOURCE)

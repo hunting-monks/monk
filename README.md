@@ -18,6 +18,11 @@ Quick Start
 	ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 	ln -sfv /usr/local/opt/node/*.plist ~/Library/LaunchAgents
 ```
+Note Pillow is needed to handle django ImageField.
+In order to install Pillow on OS X later than 10.8, run the following,
+```
+	xcode-select --install
+```
 
 1. Create a virtualenv dir
 ```

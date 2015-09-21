@@ -16,6 +16,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, "media",)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -48,6 +49,7 @@ INSTALLED_APPS = (
     # third party apps
     'django_extensions',
     'registration',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,6 +64,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'monksite.urls'
+LOGIN_URL = '/'
 
 TEMPLATE_DIRS = (
 	os.path.join(BASE_DIR, "templates",),

@@ -1,5 +1,5 @@
 import urllib
-
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -9,11 +9,9 @@ from django.template import TemplateDoesNotExist
 from django.views.generic import TemplateView
 
 
+@login_required
 def home_view(request, action=None):
-    if request.user.is_authenticated():
-        return redirect('/users/candidate_list')
-    else:
-        return redirect('/accounts/login')
+    return redirect('/users/list_candidates')
 
 
 class static_view(TemplateView):

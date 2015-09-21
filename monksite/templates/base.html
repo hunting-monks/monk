@@ -12,7 +12,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
+    <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+    
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'metisMenu/dist/metisMenu.min.js' %}"></script>
+    <script src="{% static 'dist/js/sb-admin-2.js' %}"></script>
+
+    <script src="{% static 'jquery-ui-1.11.4/jquery-ui.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
     <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/dist/css/bootstrap-theme.css' %}" rel="stylesheet">
     <link href="{% static 'metisMenu/dist/metisMenu.min.css' %}" rel="stylesheet">
     <link href="{% static 'dist/css/timeline.css' %}" rel="stylesheet">
     <link href="{% static 'dist/css/sb-admin-2.css' %}" rel="stylesheet">
@@ -37,23 +47,7 @@
     
     {% block content %}{% endblock %}
     </div>
-    <!-- /#wrapper -->
-    
-        <!-- jQuery -->
-    <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{% static 'metisMenu/dist/metisMenu.min.js' %}"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="{% static 'raphael/raphael-min.js' %}"></script>
-    <script src="{% static 'morrisjs/morris.min.js' %}"></script>
-    <script src="{% static 'js/morris-data.js' %}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{% static 'dist/js/sb-admin-2.js' %}"></script>
+    {% block foot_scripts %}{% endblock %}
 </body>
 </html>

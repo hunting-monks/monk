@@ -25,6 +25,8 @@ msgstr "账户激活失败"
 msgid "Account Activated"
 msgstr "账户已激活"
 
+msgid "Add candidate"
+msgstr "添加候选人"
 msgid "Add Candidates"
 msgstr "添加候选人"
 
@@ -43,8 +45,32 @@ msgstr "重置密码"
 msgid "Confirm password reset"
 msgstr "确认密码重置"
 
+msgid "Current company"
+msgstr "当前公司"
+
+msgid "Current title"
+msgstr "当前职位"
+
+msgid "Education"
+msgstr "教育"
+
+msgid "Experience"
+msgstr "工作经历"
+
+msgid "First name"
+msgstr "名"
+
 msgid "Forgot your password?"
 msgstr "忘记密码？"
+
+msgid "Graduated school"
+msgstr "毕业院校"
+
+msgid "Highest degree"
+msgstr "最高学位"
+
+msgid "Last name"
+msgstr "姓"
 
 msgid "Log in"
 msgstr "登录"
@@ -107,6 +133,12 @@ msgstr "用户名"
 
 msgid "View Candidates"
 msgstr "查看所有候选人"
+
+msgid "View Jobs"
+msgstr "查看所有职位"
+
+msgid "View Interviewers"
+msgstr "查看所有面试官"
 
 msgid "Your account is now activated."
 msgstr "您的账户已激活"
