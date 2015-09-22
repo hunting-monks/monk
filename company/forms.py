@@ -22,3 +22,9 @@ class ApplicantForm(ModelForm):
             'source',
             'created_by')
 
+    def clean_photo(self):
+        data = self.cleaned_data['photo']
+        if not data:
+            data = 'avartars/avartar_default.jpg'
+        return data
+

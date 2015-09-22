@@ -19,6 +19,8 @@ from django.contrib import admin
 from views import home_view
 from views import static_view
 
+import settings
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
@@ -29,5 +31,8 @@ urlpatterns = [
 
     url(r'^users/', include("company.urls")),
     url(r'^$', home_view, name='home'),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+       {'document_root': settings.MEDIA_ROOT, }),
+
     url(r'^(?P<page>.+\.html)$', static_view.as_view())
 ]

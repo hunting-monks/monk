@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <input class="form-control" type="text" id="id_graduate_date" maxlength="50" name="graduate_date" type="text" placeholder='{% trans "Graduate date" %}' />
                                     </div>
-                                    <input type='hidden' id='id_created_by' name='created_by' value="{{ request.user.id}}" />
+                                    <input type='hidden' id='id_created_by' name='created_by' value="{{ eid }}" />
                                     <div class="form-group">
                                         <select class="form-control" id="id_degree" name="degree">
                                             <option value selected="selected">{% trans "Latest degree" %}</option>

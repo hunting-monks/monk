@@ -1,23 +1,25 @@
+{% load i18n %}
+
 <div class="col-lg-3 col-md-6">
     <div class="panel panel-green">
         <div class="panel-heading">
             <div class="row">
-                <div class="col-xs-3">
-                    <i class="fa fa-comments fa-5x"></i>
+                <div class="col-xs-4">
+                    <a href="#" class="thumbnail"><img src="{{MEDIA_URL}}{{c.photo}}"></a>
                 </div>
-                <div class="col-xs-9 text-right">
+                <div class="col-xs-8 text-right">
                     <div class="large">{{c.last_name}} {{c.first_name}}</div>
                     <div>{{c.current_company}}</div>
                     <div>{{c.current_title}}</div>
                 </div>
             </div>
         </div>
-        <a href=#><!--"{% url 'candidate_detail' %}?candi=c.id"-->
-            <div class="panel-footer">
-                <span class="pull-left"><a href="">View Details</a></span>
-                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                <div class="clearfix"></div>
-            </div>
-        </a>
+        
+        <div class="panel-footer">
+            <span class="pull-left"><a href="{% url 'candidate_detail' cid=c.id %}">{% trans 'View Details' %}</a></span>
+            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+        </div>
     </div>
+    
 </div>

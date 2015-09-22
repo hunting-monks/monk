@@ -45,14 +45,20 @@ msgstr "重置密码"
 msgid "Confirm password reset"
 msgstr "确认密码重置"
 
+msgid "Create Interview"
+msgstr "创建面试"
+
 msgid "Current company"
 msgstr "当前公司"
 
 msgid "Current title"
 msgstr "当前职位"
 
+msgid "Dashboard"
+msgstr "首页"
+
 msgid "Education"
-msgstr "教育"
+msgstr "教育背景"
 
 msgid "Experience"
 msgstr "工作经历"
@@ -107,6 +113,9 @@ msgstr "请登录"
 msgid "Prepare an offer"
 msgstr "准备offer"
 
+msgid "Profile"
+msgstr "个人资料"
+
 msgid "registration"
 msgstr "注册"
 
@@ -121,6 +130,9 @@ msgstr "记住密码"
 
 msgid "Reset it"
 msgstr "密码重置"
+
+msgid "Scorecards"
+msgstr "面试纪录"
 
 msgid "Submit"
 msgstr "提交"
@@ -139,6 +151,9 @@ msgstr "查看所有职位"
 
 msgid "View Interviewers"
 msgstr "查看所有面试官"
+
+msgid "View Resume"
+msgstr "查看简历"
 
 msgid "Your account is now activated."
 msgstr "您的账户已激活"

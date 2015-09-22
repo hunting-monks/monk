@@ -17,6 +17,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, "media",)
+MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -64,7 +65,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'monksite.urls'
-LOGIN_URL = '/'
+LOGIN_URL = '/accounts/login'
 
 TEMPLATE_DIRS = (
 	os.path.join(BASE_DIR, "templates",),
@@ -87,6 +88,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 "django.core.context_processors.i18n",
+                "django.core.context_processors.media",
             ],
         },
     },
