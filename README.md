@@ -83,7 +83,7 @@ Create MySQL DB and user
 ```
 mysql -u root -p
 
-	>CREATE DATABASE monk;
+	>CREATE DATABASE monk CHARACTER SET utf8;;
 	>CREATE USER 'monk'@'localhost' IDENTIFIED BY 'monk';
 	>GRANT ALL PRIVILEGES ON * . * TO 'monk'@'localhost'; FLUSH PRIVILEGES;
 ```

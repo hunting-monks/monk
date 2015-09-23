@@ -26,9 +26,8 @@ SKILL_LEVEL = (
     (1, 'Entry'),
     (2, 'Junior'),
     (3, 'Senior'),
-    (4, 'Veteran'),
-    (5, 'Principle'),
-    (6, 'Distinguished'))
+    (4, 'Principle'),
+    (5, 'Distinguished'))
 
 
 APPLICANT_SOURCE = (
@@ -126,9 +125,9 @@ class Role(models.Model):
 
 class UserDetail(models.Model):
 
-    user_id = models.ForeignKey(User)
-    company_id = models.ForeignKey(Company)
-    role_id = models.ForeignKey(Role)
+    user = models.ForeignKey(User)
+    company = models.ForeignKey(Company)
+    role = models.ForeignKey(Role)
     phone = models.CharField(max_length=20)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

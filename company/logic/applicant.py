@@ -1,6 +1,6 @@
 from company.models import Applicant
 
 
-def get_applicants(company_id):
-    applicants = Applicant.objects.filter(created_by=company_id)
+def get_applicants_by_creator(employee_id):
+    applicants = Applicant.objects.filter(created_by=employee_id)
     return applicants

@@ -1,9 +1,12 @@
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
-from company.models import Company, Applicant
 from django.db.models.fields.related import ForeignKey
 
-# Create your models here.
+from company.models import Applicant
+from company.models import Company
+from company.models import Employee
+
 
 INDUSTRY_CATEGORIES = (
     (1, 'Accounting'),
@@ -62,40 +65,43 @@ INTERVIEW_STATUS = (
 
 class Job(models.Model):
 
-    company_id = models.ForeignKey(Company)
+    company = models.ForeignKey(Company)
     title = models.CharField(max_length=50)
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
     level = models.IntegerField(choices=SKILL_LEVEL)
     description = models.CharField(max_length=5000)
-    salary_high = models.IntegerField()
-    salary_low = models.IntegerField()
-    creator_id = models.ForeignKey(User, related_name="creator")
-    recruiter_id = models.ForeignKey(User, related_name="recruiter")
-    hiring_manager_id = models.ForeignKey(User, related_name="hm")
-    expire_date = models.DateField()
+    salary_high = models.IntegerField(blank=True, default=0)
+    salary_low = models.IntegerField(blank=True, default=0)
+
+    creator = models.ForeignKey(Employee, related_name="creator")
+    recruiter = models.ForeignKey(Employee, related_name="recruiter")
+    hiring_manager = models.ForeignKey(Employee, related_name="hm")
+
+    expire_date = models.DateField(blank=True, default=datetime.min)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class ApplicateCase(models.Model):
+class ApplicationCase(models.Model):
 
-    applicant_id = models.ForeignKey(Applicant)
-    job_id = models.ForeignKey(Job)
+    applicant = models.ForeignKey(Applicant)
+    job = models.ForeignKey(Job)
     status = models.IntegerField(choices=APPLICATION_STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    deleted = models.BooleanField(default=False)
 
 
 class Interview(models.Model):
 
-    case_id = models.ForeignKey(ApplicateCase)
-    interviewer_id = models.ForeignKey(User)
+    case = models.ForeignKey(ApplicationCase)
+    interviewer = models.ForeignKey(Employee)
     category = models.IntegerField(choices=INTERVIEW_CATEGORIES)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     status = models.IntegerField(choices=INTERVIEW_STATUS)
-    comment = models.CharField(max_length=2000)
+    comment = models.CharField(max_length=2000, blank=True, default="")
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -103,10 +109,10 @@ class Interview(models.Model):
 
 class InterviewScore(models.Model):
 
-    interview_id = models.ForeignKey(Interview)
-    evaluated_field = models.CharField(max_length=50)
-    score = models.IntegerField()
-    comment = models.CharField(max_length=2000)
+    interview = models.ForeignKey(Interview)
+    evaluated_field = models.CharField(max_length=50, blank=True, default="")
+    score = models.IntegerField(blank=True, default=0)
+    comment = models.CharField(max_length=2000, blank=True, default="")
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

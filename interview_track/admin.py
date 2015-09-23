@@ -1,11 +1,11 @@
 from django.contrib import admin
-from models import ApplicateCase
+from models import ApplicationCase
 from models import Interview
 from models import InterviewScore
 from models import Job
 
 
-class ApplicateCaseAdmin(admin.ModelAdmin):
+class ApplicationCaseAdmin(admin.ModelAdmin):
     pass
 
 
@@ -21,7 +21,7 @@ class JobAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(ApplicateCase, ApplicateCaseAdmin)
+admin.site.register(ApplicationCase, ApplicationCaseAdmin)
 admin.site.register(Interview, InterviewAdmin)
 admin.site.register(InterviewScore, InterviewScoreAdmin)
 admin.site.register(Job, JobAdmin)

@@ -36,6 +36,9 @@ msgstr "添加职位"
 msgid "Add Interviewers"
 msgstr "添加面试官"
 
+msgid "Area"
+msgstr "职位类别"
+
 msgid "Candidates"
 msgstr "候选人"
 
@@ -63,6 +66,9 @@ msgstr "教育背景"
 msgid "Experience"
 msgstr "工作经历"
 
+msgid "Expiration date"
+msgstr "截止日期"
+
 msgid "First name"
 msgstr "名"
 
@@ -74,6 +80,18 @@ msgstr "毕业院校"
 
 msgid "Highest degree"
 msgstr "最高学位"
+
+msgid "Hiring manager"
+msgstr "职位经理"
+
+msgid "Job description"
+msgstr "职位详情"
+
+msgid "Job title"
+msgstr "职位名称"
+
+msgid "Job level"
+msgstr "职位级别"
 
 msgid "Last name"
 msgstr "姓"
@@ -116,6 +134,9 @@ msgstr "准备offer"
 msgid "Profile"
 msgstr "个人资料"
 
+msgid "Recruiter"
+msgstr "职位联系人"
+
 msgid "registration"
 msgstr "注册"
 
@@ -130,6 +151,9 @@ msgstr "记住密码"
 
 msgid "Reset it"
 msgstr "密码重置"
+
+msgid "Salary range"
+msgstr "薪资范围"
 
 msgid "Scorecards"
 msgstr "面试纪录"

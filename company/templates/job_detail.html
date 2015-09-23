@@ -1,0 +1,36 @@
+{% extends "base.html"%}
+{% load i18n %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% spaceless %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload.css' %}">
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload-ui.css' %}">
+{% endblock %}
+
+{% block navbar %}
+    {% include "navbar_recruiter.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrapper">
+        
+        <div class="row">
+            <br>
+            <div class="col-lg-12">
+                <h2>{{job.title}}</h2>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>{{job.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+{% endblock %}
+
+{% endspaceless %}

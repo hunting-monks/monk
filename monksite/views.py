@@ -11,7 +11,7 @@ from django.views.generic import TemplateView
 
 @login_required
 def home_view(request, action=None):
-    return redirect('/users/list_candidates')
+    return redirect('/recruiter/list_candidates')
 
 
 class static_view(TemplateView):

@@ -29,16 +29,16 @@
                     <a href="{% url 'add_candidates' %}"><i class="fa fa-bar-chart-o fa-fw"></i>{% trans "Add Candidates" %}<span class="fa arrow"></span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-table fa-fw"></i>{% trans "View Jobs" %}</a>
+                    <a href="{% url 'list_jobs' %}"><i class="fa fa-table fa-fw"></i>{% trans "View Jobs" %}</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-table fa-fw"></i>{% trans "Add Jobs" %}</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i>{% trans "Add Interviewers" %}</a>
+                    <a href="{% url 'add_jobs' %}"><i class="fa fa-table fa-fw"></i>{% trans "Add Jobs" %}</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>{% trans "View Interviewers" %}</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>{% trans "Add Interviewers" %}</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>{% trans "Prepare an offer" %}</a>

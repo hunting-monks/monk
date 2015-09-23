@@ -21,10 +21,15 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 
 class RoleAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
+    ordering = ['name', ]
     pass
 
 
 class UserDetailAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    list_display_links = ('user',)
     pass
 
 
