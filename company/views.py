@@ -83,8 +83,7 @@ def add_jobs(request):
 def list_jobs(request):
     jobs = []
     try:
-        jobs = job.get_jobs_by_user(request.user.id)
-        for j in jobs:
+        for j in job.get_jobs_by_user(request.user.id):
             jobs.append(model_to_dict(j))
     except Exception as ex:
         print ex
@@ -96,5 +95,7 @@ def list_jobs(request):
 
 
 @login_required
-def job_detail(request):
+def job_detail(request, jobid):
+    job = Job.objects.get(pk=jobid)
+    return render(request, 'job_detail.html', {'job': job})
     return

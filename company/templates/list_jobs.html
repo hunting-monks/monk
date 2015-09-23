@@ -46,7 +46,7 @@
                     <tbody>
                         {% for job in jobs %}
                         <tr class="odd gradeX">
-                            <td>{{job.title}}</td>
+                            <td><a href="{% url 'job_detail' jobid=job.id %}"</a>{{job.title}}</td>
                             <td>{{job.area}}</td>
                             <td>{{job.level}}</td>
                             <td class="center">{{job.salary_low}}-{{job.salary_high}}</td>

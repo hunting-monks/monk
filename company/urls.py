@@ -15,6 +15,6 @@ urlpatterns = patterns('',
     url(r'^list_candidates', list_candidates, name='list_candidates'),
 # job pages
     url(r'^add_jobs', add_jobs, name='add_jobs'),
-    url(r'^job_detail/(?P<cid>\w+)/', job_detail, name='job_detail'),
+    url(r'^job_detail/(?P<jobid>\w+)/', job_detail, name='job_detail'),
     url(r'^list_jobs', list_jobs, name='list_jobs'),
 )
