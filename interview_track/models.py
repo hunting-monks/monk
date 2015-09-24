@@ -84,6 +84,8 @@ class Job(models.Model):
 
 
 class ApplicationCase(models.Model):
+    class meta:
+        unique_together = (("applicant", "job"))
 
     applicant = models.ForeignKey(Applicant)
     job = models.ForeignKey(Job)

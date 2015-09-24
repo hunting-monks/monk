@@ -60,6 +60,9 @@ msgstr "当前职位"
 msgid "Dashboard"
 msgstr "首页"
 
+msgid "Department"
+msgstr "所在部门"
+
 msgid "Education"
 msgstr "教育背景"
 
@@ -83,6 +86,9 @@ msgstr "最高学位"
 
 msgid "Hiring manager"
 msgstr "职位经理"
+
+msgid "Interviewers"
+msgstr "面试官"
 
 msgid "Job description"
 msgstr "职位详情"
@@ -163,6 +169,9 @@ msgstr "提交"
 
 msgid "Successfully logged out"
 msgstr "退出成功"
+
+msgid "Title"
+msgstr "职位"
 
 msgid "Username"
 msgstr "用户名"

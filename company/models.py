@@ -91,7 +91,7 @@ DEGREE_CHOICES = (
 
 
 class Company(models.Model):
-    name = models.CharField(verbose_name='Company Name', max_length=200)
+    name = models.CharField(verbose_name='Company Name', max_length=200, db_index=True,)
     businessDescription = models.CharField(verbose_name='Business Description', max_length=20, blank=True)
     area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
     email = models.EmailField(blank=True)
@@ -115,7 +115,7 @@ class Company(models.Model):
 
 class Role(models.Model):
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     permission = models.BigIntegerField()
     mask = models.BigIntegerField(choices=ROLE_ENUM)
     deleted = models.BooleanField(default=False)
@@ -141,35 +141,38 @@ class Employee(models.Model):
         )
 
     user = models.OneToOneField(User, null=True)
-
     company = models.ForeignKey('Company', related_name='employees')
+    role = models.ForeignKey(Role)
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
-    email = models.CharField(max_length=254, blank=True, db_index=True)
-    middleInitial = models.CharField(max_length=1, blank=True)
-    address = models.CharField(max_length=100, blank=True)
-    address2 = models.CharField(max_length=100, blank=True)
-    city = models.CharField(max_length=35, blank=True)
+    email = models.CharField(max_length=254, blank=True, db_index=True, unique=True)
+    middleInitial = models.CharField(max_length=1, blank=True, default="")
+    address = models.CharField(max_length=100, blank=True, default="")
+    address2 = models.CharField(max_length=100, blank=True, default="")
+    city = models.CharField(max_length=35, blank=True, default="")
     state = models.CharField(max_length=2, blank=True, default="")
-    zip = models.CharField(max_length=10, blank=True)
-    phone = models.CharField(max_length=25, blank=True)
+    zip = models.CharField(max_length=10, blank=True, default="")
+    phone = models.CharField(max_length=25, blank=True, default="")
 
     # shenfenzheng or ssn
     socialId = models.CharField(max_length=128, blank=True, default="")
     dob = models.CharField(max_length=10, blank=True, default="")
-    sex = models.IntegerField(choices=SEX_CHOICES, blank=True)
-    marital_status = models.CharField(max_length=2, verbose_name="Marital Status", choices=MARITAL_CHOICES, null=True, blank=True)
+    sex = models.IntegerField(choices=SEX_CHOICES, blank=True, default=0)
+    marital_status = models.CharField(max_length=2, verbose_name="Marital Status", choices=MARITAL_CHOICES, null=True, blank=True, default='U')
     isDisabled = models.BooleanField(verbose_name="Is Disabled?", default=False)
     ageRange = models.CharField(max_length=8, blank=True, default="")  # Used for manually entered employees only.
     title = models.CharField(max_length=254, blank=True, default="")
     department = models.CharField(max_length=128, default="")
 
-    status = models.CharField(max_length=3, choices=EE_STATUS_CHOICES)  # Active, LOA, Terminated
-    photoUrl = models.CharField(max_length=255, blank=True, default="")
+    status = models.CharField(max_length=3, choices=EE_STATUS_CHOICES, default='Act')  # Active, LOA, Terminated
+    photo = models.CharField(max_length=255, blank=True, default="")
+    deleted = models.BooleanField(blank=True, default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return self.first_name + ' ' + self.last_name + ' ' + self.company.name
+        return "%s %s - %s" % (self.first_name, self.last_name, self.company.name)
 
 
 class Applicant(models.Model):
@@ -178,7 +181,7 @@ class Applicant(models.Model):
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
-    email = models.EmailField(blank=True, db_index=True)
+    email = models.EmailField(blank=True, db_index=True, unique=True)
     middleInitial = models.CharField(max_length=1, blank=True, default="")
     address = models.CharField(max_length=100, blank=True, default="")
     address2 = models.CharField(max_length=100, blank=True, default="")
