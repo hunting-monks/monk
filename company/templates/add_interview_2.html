@@ -1,0 +1,74 @@
+{% extends "base.html"%}
+{% load i18n %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% spaceless %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload.css' %}">
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.11.4/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block navbar %}
+    {% include "navbar_recruiter.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% trans "Start an interview" %}</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3 class="panel-title">{% trans "Applicant" %} {{candi.last_name}} {{candi.first_name}}</h3></div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            {{candi.current_title}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            {{candi.current_company}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3 class="panel-title">{% trans "Job" %} {{job.title}}</h3></div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            {{job.description}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+{% endblock %}
+
+{% block foot_scripts %}
+
+{% endblock %}
+
+{% endspaceless %}

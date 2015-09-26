@@ -82,6 +82,9 @@ class Job(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return "%d: %s - %s" % (self.id, self.title, self.company)
+
 
 class ApplicationCase(models.Model):
     class meta:
@@ -90,6 +93,8 @@ class ApplicationCase(models.Model):
     applicant = models.ForeignKey(Applicant)
     job = models.ForeignKey(Job)
     status = models.IntegerField(choices=APPLICATION_STATUS)
+
+    creator = models.ForeignKey(Employee)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted = models.BooleanField(default=False)

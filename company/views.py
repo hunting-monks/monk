@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from forms import ApplicantForm
+from forms import ApplicationCaseForm
 from forms import EmployeeForm
 from forms import JobForm
 from interview_track.models import Job
@@ -18,9 +19,16 @@ from models import Applicant
 from models import Employee
 
 
-'''functions for rendering candidate pages'''
+@login_required
+def dashboard(request):
+    return render_to_response(
+            'recruiter_home.html',
+            context_instance=RequestContext(request))
+
+
 @login_required
 def list_candidates(request):
+    """functions for rendering candidate pages"""
     candidates = []
     try:
         emp = employee.get_employee_by_user(request.user.id)
@@ -139,6 +147,50 @@ def list_interviewers(request):
 
 @login_required
 def interviewer_detail(request, jobid):
+    interviewer = Employee.objects.get(pk=jobid)
+    return render(request, 'interviewer_detail.html', {'interviewer': interviewer})
+
+
+'''functions for rendering interview case pages'''
+@login_required
+def add_interview(request):
+    emp = employee.get_employee_by_user(userid=request.user.id)
+    if request.method == 'POST':
+        form = ApplicationCaseForm(request.POST)
+        if form.is_valid():
+            try:
+                app = form.save()
+                return render(
+                    request,
+                    'add_interview_2.html',
+                    {'candi': app.applicant, 'job': app.job})
+            except Exception as ex:
+                print ex
+    else:
+        form = ApplicationCaseForm()
+    return render(
+        request,
+        'add_interview.html',
+        {'form': form, 'eid': emp.id})
+
+
+@login_required
+def list_interviews(request):
+    interviewers = []
+    try:
+        for j in employee.get_interviewers_by_recruiter(request.user.id):
+            interviewers.append(model_to_dict(j))
+    except Exception as ex:
+        print ex
+        pass
+    return render_to_response(
+            'list_interviewers.html',
+            {'interviewers': interviewers},
+            context_instance=RequestContext(request))
+
+
+@login_required
+def interview_detail(request, jobid):
     interviewer = Employee.objects.get(pk=jobid)
     return render(request, 'interviewer_detail.html', {'interviewer': interviewer})
     return

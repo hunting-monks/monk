@@ -8,10 +8,17 @@ from django.template import RequestContext
 from django.template import TemplateDoesNotExist
 from django.views.generic import TemplateView
 
+from company.logic import employee
 
 @login_required
-def home_view(request, action=None):
-    return redirect('/recruiter/list_candidates')
+def home_view(request):
+    role = employee.get_user_role(request.user.id)
+    if role == 'Recruiter':
+        return redirect('/recruiter/home')
+    elif role == 'Interviewer':
+        return redirect('/interviewer/home')
+    else:
+        return redirect('/recruiter/home')  # hack: will have a default dashboard
 
 
 class static_view(TemplateView):

@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>{% trans 'Title' %}</th>
+                <th>{% trans 'Category' %}</th>
+                <th>{% trans 'Level' %}</th>
+                <th>{% trans 'Salary Range' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr class="odd gradeX">
+                <td class="center"><a href="{% url 'job_detail' jobid=job.id %}">{{job.title}}</a></td>
+                <td class="center">{{job.area}}</td>
+                <td class="center">{{job.level}}</td>
+                <td class="center">{{job.salary_low}}-{{job.salary_high}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

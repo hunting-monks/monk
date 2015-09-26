@@ -164,6 +164,9 @@ msgstr "薪资范围"
 msgid "Scorecards"
 msgstr "面试纪录"
 
+msgid "Start Interviews"
+msgstr "创建面试"
+
 msgid "Submit"
 msgstr "提交"
 
@@ -179,11 +182,14 @@ msgstr "用户名"
 msgid "View Candidates"
 msgstr "查看所有候选人"
 
-msgid "View Jobs"
-msgstr "查看所有职位"
+msgid "View Interviews"
+msgstr "查看面试"
 
 msgid "View Interviewers"
 msgstr "查看所有面试官"
+
+msgid "View Jobs"
+msgstr "查看所有职位"
 
 msgid "View Resume"
 msgstr "查看简历"

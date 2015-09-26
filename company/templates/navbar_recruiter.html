@@ -17,10 +17,13 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-dashboard fa-fw"></i>{% trans "Dashboard" %}</a>
+                    <a href="{% url 'recruiter_dashboard' %}"><i class="fa fa-dashboard fa-fw"></i>{% trans "Dashboard" %}</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-dashboard fa-fw"></i>{% trans "Create Interview" %}</a>
+                    <a href="{% url 'add_interview' %}"><i class="fa fa-dashboard fa-fw"></i>{% trans "Start Interviews" %}</a>
+                </li>
+                <li>
+                    <a href="{% url 'list_interviews' %}"><i class="fa fa-dashboard fa-fw"></i>{% trans "View Interviews" %}</a>
                 </li>
                 <li>
                     <a href="{% url 'list_candidates' %}"><i class="fa fa-dashboard fa-fw"></i>{% trans "View Candidates" %}</a>

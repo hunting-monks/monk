@@ -122,6 +122,8 @@ class Role(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.name
 
 class UserDetail(models.Model):
 
@@ -236,3 +238,6 @@ class Applicant(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     created_by = models.ForeignKey(Employee, related_name="author")
+
+    def __unicode__(self):
+        return "%d: %s%s - %s" % (self.id, self.last_name, self.first_name, self.email)
