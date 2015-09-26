@@ -1,0 +1,105 @@
+-- MySQL dump 10.13  Distrib 5.6.26, for osx10.10 (x86_64)
+--
+-- Host: localhost    Database: monk
+-- ------------------------------------------------------
+-- Server version	5.6.26
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `company_applicant`
+--
+
+DROP TABLE IF EXISTS `company_applicant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company_applicant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `middleInitial` varchar(1) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `address2` varchar(100) NOT NULL,
+  `city` varchar(35) NOT NULL,
+  `state` varchar(2) NOT NULL,
+  `zip` varchar(10) NOT NULL,
+  `phone` varchar(25) NOT NULL,
+  `area` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `expected_salary` int(11) NOT NULL,
+  `current_salary` int(11) NOT NULL,
+  `current_company` varchar(200) NOT NULL,
+  `current_title` varchar(50) NOT NULL,
+  `current_start_date` date NOT NULL,
+  `current_end_date` date NOT NULL,
+  `prev_company1` varchar(200) NOT NULL,
+  `prev_title1` varchar(50) NOT NULL,
+  `prev_start_date1` date NOT NULL,
+  `prev_end_date1` date NOT NULL,
+  `prev_company2` varchar(200) NOT NULL,
+  `prev_title2` varchar(50) NOT NULL,
+  `prev_start_date2` date NOT NULL,
+  `prev_end_date2` date NOT NULL,
+  `prev_company3` varchar(200) NOT NULL,
+  `prev_title3` varchar(50) NOT NULL,
+  `prev_start_date3` date NOT NULL,
+  `prev_end_date3` date NOT NULL,
+  `graduate_school` varchar(50) NOT NULL,
+  `degree` int(11) NOT NULL,
+  `graduate_date` date NOT NULL,
+  `graduate_school2` varchar(50) NOT NULL,
+  `degree2` int(11) NOT NULL,
+  `graduate_date2` date NOT NULL,
+  `graduate_school3` varchar(50) NOT NULL,
+  `degree3` int(11) NOT NULL,
+  `graduate_date3` date NOT NULL,
+  `source` int(11) NOT NULL,
+  `source_id` bigint(20) NOT NULL,
+  `deleted` tinyint(1) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `user_id` int(11),
+  `created_by_id` int(11) NOT NULL,
+  `photo` varchar(100) NOT NULL,
+  `resume` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  KEY `company_applicant_2a034e9d` (`first_name`),
+  KEY `company_applicant_7d4553c0` (`last_name`),
+  KEY `company_applicant_0c83f57c` (`email`),
+  KEY `company_applicant_e93cb7eb` (`created_by_id`),
+  CONSTRAINT `company_ap_created_by_id_19bdedf123041505_fk_company_employee_id` FOREIGN KEY (`created_by_id`) REFERENCES `company_employee` (`id`),
+  CONSTRAINT `company_applicant_user_id_72ae9f127726d984_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company_applicant`
+--
+
+LOCK TABLES `company_applicant` WRITE;
+/*!40000 ALTER TABLE `company_applicant` DISABLE KEYS */;
+INSERT INTO `company_applicant` VALUES (1,'yudong','Tan','yudong.tan@gmail.com','','oakland ave','brokaw ave','San Jose','CA','95131','4085077866',4,3,10000,10000,'MIcrosoft','Sr Engineer','2014-04-09','2015-09-14','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',0,'2014-11-04','',0,'0001-01-01','',0,'0001-01-01',2,0,0,'2015-09-19 03:54:25.560061','2015-09-19 04:43:59.896665',NULL,1,'',''),(2,'foo','bar','monk@monk.com','','99 Fuquan Rd','','Shanghai','SH','200035','4085077866',2,3,10000,10000,'MIcrosoft','Sr Engineer','2014-04-09','2015-09-14','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',0,'2014-11-04','',0,'0001-01-01','',0,'0001-01-01',2,0,0,'2015-09-19 03:55:13.168112','2015-09-21 23:01:47.562098',NULL,1,'','resumes/cikm09.pdf'),(3,'John','Smith','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-03','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 18:18:20.207881','2015-09-21 18:18:20.208105',NULL,1,'avartars/avartar1_EJRWgPG.jpg',''),(4,'yudong','Tan','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',3,'2015-09-10','',0,'0001-01-01','',0,'0001-01-01',3,0,0,'2015-09-21 18:27:06.481966','2015-09-21 18:27:06.482003',NULL,1,'avartars/avartar2.jpg','resumes/bg.jpg'),(5,'yudong','Tan','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',2,'2015-09-10','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 18:30:23.400210','2015-09-21 18:30:23.400247',NULL,1,'',''),(6,'John','Smith','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-11','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 18:31:06.011697','2015-09-21 18:31:06.011797',NULL,1,'',''),(7,'John','Smith','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-11','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 18:40:49.288735','2015-09-21 18:40:49.288808',NULL,1,'',''),(8,'yudong','Tan','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-03','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 18:52:21.764643','2015-09-21 18:52:21.764706',NULL,1,'',''),(9,'yudong','Tan','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-03','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 18:58:15.137642','2015-09-21 18:58:15.137677',NULL,1,'',''),(10,'yudong','Tan','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-03','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 19:02:53.533823','2015-09-21 19:02:53.533860',NULL,1,'',''),(11,'yudong','Tan','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-03','',0,'0001-01-01','',0,'0001-01-01',1,0,0,'2015-09-21 19:05:26.042863','2015-09-21 19:05:26.042901',NULL,1,'',''),(12,'John','Smith','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',1,'2015-09-25','',0,'0001-01-01','',0,'0001-01-01',2,0,0,'2015-09-21 22:13:56.789611','2015-09-21 22:13:56.789653',NULL,1,'',''),(13,'John','monk','','','','','','','','',0,0,0,0,'MIcrosoft','Sr Engineer','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','','','0001-01-01','0001-01-01','Shanghai Jiaotong Univ',2,'2015-09-02','',0,'0001-01-01','',0,'0001-01-01',2,0,0,'2015-09-22 05:34:29.326353','2015-09-22 05:34:29.326397',NULL,1,'avartars/avartar_default.jpg','');
+/*!40000 ALTER TABLE `company_applicant` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-09-27  3:10:10

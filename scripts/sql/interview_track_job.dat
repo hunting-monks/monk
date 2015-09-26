@@ -1,0 +1,72 @@
+-- MySQL dump 10.13  Distrib 5.6.26, for osx10.10 (x86_64)
+--
+-- Host: localhost    Database: monk
+-- ------------------------------------------------------
+-- Server version	5.6.26
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `interview_track_job`
+--
+
+DROP TABLE IF EXISTS `interview_track_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `interview_track_job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `area` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `description` varchar(5000) NOT NULL,
+  `salary_high` int(11) NOT NULL,
+  `salary_low` int(11) NOT NULL,
+  `expire_date` date NOT NULL,
+  `deleted` tinyint(1) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `creator_id` int(11) NOT NULL,
+  `hiring_manager_id` int(11) NOT NULL,
+  `recruiter_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `interview_trac_company_id_4d4daa0381d402d6_fk_company_company_id` (`company_id`),
+  KEY `interview_trac_creator_id_56f6038f1feb5e3_fk_company_employee_id` (`creator_id`),
+  KEY `interv_hiring_manager_id_315154d511b002ab_fk_company_employee_id` (`hiring_manager_id`),
+  KEY `interview_t_recruiter_id_5a6cb18bafd8d802_fk_company_employee_id` (`recruiter_id`),
+  CONSTRAINT `interv_hiring_manager_id_315154d511b002ab_fk_company_employee_id` FOREIGN KEY (`hiring_manager_id`) REFERENCES `company_employee` (`id`),
+  CONSTRAINT `interview_t_recruiter_id_5a6cb18bafd8d802_fk_company_employee_id` FOREIGN KEY (`recruiter_id`) REFERENCES `company_employee` (`id`),
+  CONSTRAINT `interview_trac_company_id_4d4daa0381d402d6_fk_company_company_id` FOREIGN KEY (`company_id`) REFERENCES `company_company` (`id`),
+  CONSTRAINT `interview_trac_creator_id_56f6038f1feb5e3_fk_company_employee_id` FOREIGN KEY (`creator_id`) REFERENCES `company_employee` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `interview_track_job`
+--
+
+LOCK TABLES `interview_track_job` WRITE;
+/*!40000 ALTER TABLE `interview_track_job` DISABLE KEYS */;
+INSERT INTO `interview_track_job` VALUES (5,'高级工程师',2,1,'教授级高工，即教授级高级工程师。 高级工程师是中国专业技术职称工程类中的高级职称（职称改革后称为专业技术职务任职资格），也是工程师任职资格职称里的最高职称，而教授级高级工程师是高级工程师任职资格职称里的最高级别之一。',10000,5000,'0001-01-01',0,'2015-09-23 05:54:40.360349','2015-09-23 05:54:40.360389',1,1,1,1),(6,'工程师',3,5,'高级工程师分为两级三类： 高级工程师（副高）、研究员级高级工程师（正高）、教授级高级工程师（正高）。 教授级高级工程师对应于教育类教授。 高级工程师（Senior Engineer）相当于副教授级别，教授级高级工程师（professorate senior engineer）相当于大学的正教授级别',12000,5000,'0001-01-01',0,'2015-09-23 06:01:08.413603','2015-09-23 06:01:08.413644',1,1,1,1);
+/*!40000 ALTER TABLE `interview_track_job` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-09-27  3:10:10

@@ -32,19 +32,32 @@ In order to install Pillow on OS X later than 10.8, run the following,
 ```
 
 2. Create database 'monk' in mysql
+```
+mysql -u root -p
+
+	>CREATE DATABASE monk CHARACTER SET utf8;;
+	>CREATE USER 'monk'@'localhost' IDENTIFIED BY 'monk';
+	>GRANT ALL PRIVILEGES ON * . * TO 'monk'@'localhost'; FLUSH PRIVILEGES;
+```
 
 3. Create django tables
 ```
 	python manage.py migrate
 ```
 
-4. Generate Chinese translation file
+4. Fill in test data to DB
+```
+	cd scripts
+	. fill_db.sh
+```
+
+5. Generate Chinese translation file
 ```
    	export DJANGO_SETTINGS_MODULE=monksite.settings
    	django-admin compilemessages
 ```
 
-5. Bringup webserver, then access http://127.0.0.1:8000
+6. Bringup webserver, then access http://127.0.0.1:8000
 ```
 	python manage.py runserver
 ```
@@ -77,14 +90,3 @@ Create admin superuser
 ```
 	python manage.py createsuperuser
 ```
-
-Create MySQL DB and user
------------------------
-```
-mysql -u root -p
-
-	>CREATE DATABASE monk CHARACTER SET utf8;;
-	>CREATE USER 'monk'@'localhost' IDENTIFIED BY 'monk';
-	>GRANT ALL PRIVILEGES ON * . * TO 'monk'@'localhost'; FLUSH PRIVILEGES;
-```
-
