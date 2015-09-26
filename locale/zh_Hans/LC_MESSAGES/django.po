@@ -36,11 +36,17 @@ msgstr "添加职位"
 msgid "Add Interviewers"
 msgstr "添加面试官"
 
+msgid "Applicant"
+msgstr "候选人"
+
 msgid "Area"
 msgstr "职位类别"
 
 msgid "Candidates"
 msgstr "候选人"
+
+msgid "Case ID"
+msgstr "序号"
 
 msgid "Change password"
 msgstr "重置密码"
@@ -116,6 +122,9 @@ msgstr "已退出"
 msgid "Monk Hunting"
 msgstr "芒克招聘网"
 
+msgid "My monk"
+msgstr "我的芒克"
+
 msgid "Not a member?"
 msgstr "还未注册？"
 
@@ -167,6 +176,9 @@ msgstr "面试纪录"
 msgid "Start Interviews"
 msgstr "创建面试"
 
+msgid "Status"
+msgstr "状态"
+
 msgid "Submit"
 msgstr "提交"
 
@@ -193,6 +205,9 @@ msgstr "查看所有职位"
 
 msgid "View Resume"
 msgstr "查看简历"
+
+msgid "Write Feedback"
+msgstr "填写反馈"
 
 msgid "Your account is now activated."
 msgstr "您的账户已激活"

@@ -30,6 +30,8 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
 # recruiter pages
     url(r'^recruiter/', include("company.urls")),
+# interviewer pages
+    url(r'^interviewer/', include("interviewer.urls")),
 
     url(r'^$', home_view, name='home'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',

@@ -46,7 +46,9 @@ INSTALLED_APPS = (
     # main app
     'interview_track',
     'company',
+    'interviewer',
     'monksite',
+
     # third party apps
     'django_extensions',
     'registration',
