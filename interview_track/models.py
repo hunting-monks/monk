@@ -55,7 +55,7 @@ class Job(models.Model):
     recruiter = models.ForeignKey(Employee, related_name="recruiter")
     hiring_manager = models.ForeignKey(Employee, related_name="hm")
 
-    expire_date = models.DateField(blank=True, default=datetime.min)
+    expire_date = models.DateField(blank=True, default=date.min)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

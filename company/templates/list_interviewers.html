@@ -46,7 +46,7 @@
                     <tbody>
                         {% for int in interviewers %}
                         <tr class="odd gradeX">
-                            <td class="center"><a href="{% url 'interviewer_detail' interviewer_id=int.id %}">{{int.last_name}} {{int.first_name}}</a></td>
+                            <td class="center">{{int.last_name}} {{int.first_name}}</td>
                             <td class="center">{{int.title}}</td>
                             <td class="center">{{int.department}}</td>
                             <td class="center">{{int.email}}</td>

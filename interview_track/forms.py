@@ -17,7 +17,10 @@ class InterviewForm(ModelForm):
         fields = (
             'case',
             'category',
-            'interviewer')
+            'interviewer',
+            'interview_date',
+            'start_time',
+            'end_time')
 
     def __init__(self, *args, **kwargs):
         eid = kwargs.pop('eid', '')

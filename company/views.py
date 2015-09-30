@@ -16,10 +16,11 @@ from forms import ApplicantForm
 from forms import ApplicationCaseForm
 from forms import EmployeeForm
 from forms import JobForm
+from interview_track.forms import InterviewForm
+from interview_track.logic import applicationcase
 from interview_track.models import ApplicationCase
 from interview_track.models import Interview
 from interview_track.models import Job
-from interview_track.forms import InterviewForm
 from logic import applicant
 from logic import employee
 from logic import job
@@ -29,8 +30,12 @@ from models import Employee
 
 @login_required
 def dashboard(request):
+    cases = applicationcase.get_application_cases_by_uid(request.user.id)
+    jobs = job.get_jobs_by_user(request.user.id)
     return render_to_response(
             'recruiter_home.html',
+            {'cases': cases,
+             'jobs': jobs},
             context_instance=RequestContext(request))
 
 
@@ -90,19 +95,18 @@ def add_jobs(request):
             except Exception as ex:
                 print ex
     else:
-        form = JobForm()
+        form = JobForm(cid=emp.company.id)
     return render(
         request,
         'add_job.html',
-        {'form': form, 'eid': emp.id, 'cid': emp.company.id})
+        {'form': form, 'cid': emp.company.id, 'eid': emp.id})
 
 
 @login_required
 def list_jobs(request):
     jobs = []
     try:
-        for j in job.get_jobs_by_user(request.user.id):
-            jobs.append(model_to_dict(j))
+        jobs = job.get_jobs_by_user(request.user.id)
     except Exception as ex:
         print ex
         pass
@@ -203,16 +207,14 @@ def add_case(request):
 
 @login_required
 def list_cases(request):
-    interviewers = []
+    cases = []
     try:
-        for j in employee.get_interviewers_by_recruiter(request.user.id):
-            interviewers.append(model_to_dict(j))
+        cases = applicationcase.get_application_cases_by_uid(request.user.id)
     except Exception as ex:
         print ex
-        pass
     return render_to_response(
-            'list_interviewers.html',
-            {'interviewers': interviewers},
+            'list_cases.html',
+            {'cases': cases},
             context_instance=RequestContext(request))
 
 

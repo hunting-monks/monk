@@ -76,21 +76,22 @@ class JobForm(ModelForm):
             'description',
             'salary_high',
             'salary_low',
+            'expire_date',
             'creator',
             'recruiter',
             'hiring_manager')
 
     def __init__(self, *args, **kwargs):
-        company = kwargs.pop('cid', '')
+        cid = kwargs.pop('cid', '')
         super(JobForm, self).__init__(*args, **kwargs)
-        if not company:
+        if not cid:
             return
         self.fields['recruiter'] = ModelChoiceField(
             queryset=Employee.objects.filter(
-            company=company, role=ROLES_MAP['Recruiter']))
+            company_id=cid, role__name='Recruiter'))
         self.fields['hiring_manager'] = ModelChoiceField(
             queryset=Employee.objects.filter(
-            company=company, role=ROLES_MAP['Hiring Manager']))
+            company_id=cid, role__name='Hiring Manager'))
 
 
 class ApplicationCaseForm(ModelForm):
