@@ -11,7 +11,8 @@ INDUSTRY_CATEGORIES = (
     (2, 'Computer Hardware'),
     (3, 'Computer Software'),
     (4, 'Internet'))
-INDUSTRY_CATEGORIES_MAP = utils.list2dict_reverse(INDUSTRY_CATEGORIES)
+INDUSTRY_CATEGORIES_MAP = utils.list2map(INDUSTRY_CATEGORIES)
+INDUSTRY_CATEGORIES_DICT = utils.list2dict(INDUSTRY_CATEGORIES)
 
 ROLES = (
     (0, 'Unknown'),
@@ -19,7 +20,8 @@ ROLES = (
     (1 << 2, 'Interviewer'),
     (1 << 3, 'Recruiter'),
     (1 << 4, 'Hiring Manager'))
-ROLES_MAP = utils.list2dict_reverse(ROLES)
+ROLES_MAP = utils.list2map(ROLES)
+ROLES_DICT = utils.list2dict(ROLES)
 
 SKILL_LEVEL = (
     (0, 'Unknown'),
@@ -28,32 +30,37 @@ SKILL_LEVEL = (
     (3, 'Senior'),
     (4, 'Principle'),
     (5, 'Distinguished'))
-SKILL_LEVEL_MAP = utils.list2dict_reverse(SKILL_LEVEL)
+SKILL_LEVEL_MAP = utils.list2map(SKILL_LEVEL)
+SKILL_LEVEL_DICT = utils.list2dict(SKILL_LEVEL)
 
 APPLICANT_SOURCE = (
     (0, 'Unknown'),
     (1, 'Internal referral'),
     (2, 'Self submitted'),
     (3, 'Linkedin'))
-APPLICANT_SOURCE_MAP = utils.list2dict_reverse(APPLICANT_SOURCE)
+APPLICANT_SOURCE_MAP = utils.list2map(APPLICANT_SOURCE)
+APPLICANT_SOURCE_DICT = utils.list2dict(APPLICANT_SOURCE)
 
 SEX_CHOICES = (
     (0, 'U'),
     (1, 'M'),
     (2, 'F'))
-SEX_CHOICES_MAP = utils.list2dict_reverse(SEX_CHOICES)
+SEX_CHOICES_MAP = utils.list2map(SEX_CHOICES)
+SEX_CHOICES_DICT = utils.list2dict(SEX_CHOICES)
 
 EE_STATUS_CHOICES = (
     ('Ped', 'Pending'),
     ('Act', 'Active'),
     ('Del', 'Deleted'))
-EE_STATUS_CHOICES_MAP = utils.list2dict_reverse(EE_STATUS_CHOICES)
+EE_STATUS_CHOICES_MAP = utils.list2map(EE_STATUS_CHOICES)
+EE_STATUS_CHOICES_DICT = utils.list2dict(EE_STATUS_CHOICES)
 
 MARITAL_CHOICES = (
     ('U', 'Unknown'),
     ('S', 'Single'),
     ('M', 'Married'))
-MARITAL_CHOICES_MAP = utils.list2dict_reverse(MARITAL_CHOICES)
+MARITAL_CHOICES_MAP = utils.list2map(MARITAL_CHOICES)
+MARITAL_CHOICES_DICT = utils.list2dict(MARITAL_CHOICES)
 
 DEGREE_CHOICES = (
     (0, 'Unknown'),
@@ -61,7 +68,8 @@ DEGREE_CHOICES = (
     (2, 'BS'),
     (3, 'MS'),
     (4, 'PHD'))
-DEGREE_CHOICES_MAP = utils.list2dict_reverse(DEGREE_CHOICES)
+DEGREE_CHOICES_MAP = utils.list2map(DEGREE_CHOICES)
+DEGREE_CHOICES_DICT = utils.list2dict(DEGREE_CHOICES)
 
 
 class Company(models.Model):

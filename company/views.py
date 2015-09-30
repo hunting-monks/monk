@@ -19,6 +19,7 @@ from forms import JobForm
 from interview_track.forms import InterviewForm
 from interview_track.logic import applicationcase
 from interview_track.models import ApplicationCase
+from interview_track.models import APPLICATION_STATUS_DICT
 from interview_track.models import Interview
 from interview_track.models import Job
 from logic import applicant
@@ -26,6 +27,8 @@ from logic import employee
 from logic import job
 from models import Applicant
 from models import Employee
+from models import INDUSTRY_CATEGORIES_DICT
+from models import SKILL_LEVEL_DICT
 
 
 @login_required
@@ -112,7 +115,9 @@ def list_jobs(request):
         pass
     return render_to_response(
             'list_jobs.html',
-            {'jobs': jobs},
+            {'jobs': jobs,
+             'job_categories': INDUSTRY_CATEGORIES_DICT,
+             'skill_levels': SKILL_LEVEL_DICT},
             context_instance=RequestContext(request))
 
 
@@ -214,7 +219,7 @@ def list_cases(request):
         print ex
     return render_to_response(
             'list_cases.html',
-            {'cases': cases},
+            {'cases': cases, 'status_dict': APPLICATION_STATUS_DICT},
             context_instance=RequestContext(request))
 
 

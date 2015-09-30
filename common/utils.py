@@ -1,5 +1,14 @@
+def list2dict(data):
+    """given a list of tuples, return a dict, where the first elements
+    are keys, and the second elements are values"""
+    dict = {}
+    for d in data:
+        dict[d[0]] = d[1]
+    return dict
 
-def list2dict_reverse(data):
+def list2map(data):
+    """given a list of tuples, return a dict, where the second elements
+    are keys, and the frist elements are values"""
     dict = {}
     for d in data:
         dict[d[1]] = d[0]

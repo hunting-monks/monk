@@ -22,7 +22,8 @@ APPLICATION_STATUS = (
     (6, 'Offered'),
     (7, 'Rejected'),
     (8, 'On hold'))
-APPLICATION_STATUS_MAP = utils.list2dict_reverse(APPLICATION_STATUS)
+APPLICATION_STATUS_MAP = utils.list2map(APPLICATION_STATUS)
+APPLICATION_STATUS_DICT = utils.list2dict(APPLICATION_STATUS)
 
 INTERVIEW_CATEGORIES = (
     ('', 'Interview type'),
@@ -30,7 +31,8 @@ INTERVIEW_CATEGORIES = (
     (2, 'Onsite'),
     (3, 'Onsite with HR'),
     (4, 'Onsite with HM'))
-INTERVIEW_CATEGORIES_MAP = utils.list2dict_reverse(INTERVIEW_CATEGORIES)
+INTERVIEW_CATEGORIES_MAP = utils.list2map(INTERVIEW_CATEGORIES)
+INTERVIEW_CATEGORIES_DICT = utils.list2dict(INTERVIEW_CATEGORIES)
 
 INTERVIEW_STATUS = (
     (1, 'Scheduled'),
@@ -38,7 +40,8 @@ INTERVIEW_STATUS = (
     (3, 'Interviewer Confirmed'),
     (4, 'Passed'),
     (5, 'Rejected'))
-INTERVIEW_STATUS_MAP = utils.list2dict_reverse(INTERVIEW_STATUS)
+INTERVIEW_STATUS_MAP = utils.list2map(INTERVIEW_STATUS)
+INTERVIEW_STATUS_DICT = utils.list2dict(INTERVIEW_STATUS)
 
 
 class Job(models.Model):

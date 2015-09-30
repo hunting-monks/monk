@@ -39,6 +39,9 @@ msgstr "添加面试官"
 msgid "Applicant"
 msgstr "候选人"
 
+msgid "Application cases"
+msgstr "面试列表"
+
 msgid "Area"
 msgstr "职位类别"
 
@@ -71,6 +74,9 @@ msgstr "首页"
 
 msgid "Department"
 msgstr "所在部门"
+
+msgid "Details"
+msgstr "查看详情"
 
 msgid "Education"
 msgstr "教育背景"
@@ -108,12 +114,17 @@ msgstr "面试官"
 msgid "Job description"
 msgstr "职位详情"
 
+msgid "Job ID"
+msgstr "职位代码"
+
 msgid "Job title"
 msgstr "职位名称"
 
 msgid "Job level"
 msgstr "职位级别"
 
+msgid "Jobs"
+msgstr "职位"
 msgid "Job openings"
 msgstr "职位"
 
@@ -139,6 +150,9 @@ msgstr "芒克招聘网"
 
 msgid "My monk"
 msgstr "我的芒克"
+
+msgid "Not started"
+msgstr "尚未开始"
 
 msgid "Not a member?"
 msgstr "还未注册？"
