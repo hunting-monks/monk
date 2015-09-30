@@ -47,7 +47,7 @@ CREATE TABLE `interview_track_job` (
   CONSTRAINT `interview_t_recruiter_id_5a6cb18bafd8d802_fk_company_employee_id` FOREIGN KEY (`recruiter_id`) REFERENCES `company_employee` (`id`),
   CONSTRAINT `interview_trac_company_id_4d4daa0381d402d6_fk_company_company_id` FOREIGN KEY (`company_id`) REFERENCES `company_company` (`id`),
   CONSTRAINT `interview_trac_creator_id_56f6038f1feb5e3_fk_company_employee_id` FOREIGN KEY (`creator_id`) REFERENCES `company_employee` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,7 +56,7 @@ CREATE TABLE `interview_track_job` (
 
 LOCK TABLES `interview_track_job` WRITE;
 /*!40000 ALTER TABLE `interview_track_job` DISABLE KEYS */;
-INSERT INTO `interview_track_job` VALUES (5,'高级工程师',2,1,'教授级高工，即教授级高级工程师。 高级工程师是中国专业技术职称工程类中的高级职称（职称改革后称为专业技术职务任职资格），也是工程师任职资格职称里的最高职称，而教授级高级工程师是高级工程师任职资格职称里的最高级别之一。',10000,5000,'0001-01-01',0,'2015-09-23 05:54:40.360349','2015-09-23 05:54:40.360389',1,1,1,1),(6,'工程师',3,5,'高级工程师分为两级三类： 高级工程师（副高）、研究员级高级工程师（正高）、教授级高级工程师（正高）。 教授级高级工程师对应于教育类教授。 高级工程师（Senior Engineer）相当于副教授级别，教授级高级工程师（professorate senior engineer）相当于大学的正教授级别',12000,5000,'0001-01-01',0,'2015-09-23 06:01:08.413603','2015-09-23 06:01:08.413644',1,1,1,1);
+INSERT INTO `interview_track_job` VALUES (5,'高级工程师',2,1,'教授级高工，即教授级高级工程师。 高级工程师是中国专业技术职称工程类中的高级职称（职称改革后称为专业技术职务任职资格），也是工程师任职资格职称里的最高职称，而教授级高级工程师是高级工程师任职资格职称里的最高级别之一。',10000,5000,'0001-01-01',0,'2015-09-23 05:54:40.360349','2015-09-23 05:54:40.360389',1,1,1,1),(6,'工程师',3,5,'高级工程师分为两级三类： 高级工程师（副高）、研究员级高级工程师（正高）、教授级高级工程师（正高）。 教授级高级工程师对应于教育类教授。 高级工程师（Senior Engineer）相当于副教授级别，教授级高级工程师（professorate senior engineer）相当于大学的正教授级别',12000,5000,'0001-01-01',0,'2015-09-23 06:01:08.413603','2015-09-23 06:01:08.413644',1,1,1,1),(7,'高级经理',2,3,'依托学院雄厚的MBA师资队伍，“高级经理工商管理核心课程研修班”为因工作繁忙，没有足够的时间参加MBA脱产学习的企业界高层管理者提供了一个系统学习现代企业管理知识的平台，从而帮助他们优化管理知识结构，更新管理理念，开拓视野，自我超越。',10000,5000,'0001-01-01',0,'2015-09-30 03:54:04.890784','2015-09-30 03:54:04.890841',1,4,6,1),(8,'高级经理',3,3,'依托学院雄厚的MBA师资队伍，“高级经理工商管理核心课程研修班”为因工作繁忙，没有足够的时间参加MBA脱产学习的企业界高层管理者提供了一个系统学习现代企业管理知识的平台，从而帮助他们优化管理知识结构，更新管理理念，开拓视野，自我超越。',10000,5000,'0001-01-01',0,'2015-09-30 04:07:58.768328','2015-09-30 04:07:58.768391',1,4,6,1),(9,'工程师',3,4,'依托学院雄厚的MBA师资队伍，“高级经理工商管理核心课程研修班”为因工作繁忙，没有足够的时间参加MBA脱产学习的企业界高层管理者提供了一个系统学习现代企业管理知识的平台，从而帮助他们优化管理知识结构，更新管理理念，开拓视野，自我超越。',10000,5000,'2015-09-02',0,'2015-09-30 04:09:57.317663','2015-09-30 04:09:57.317707',1,4,6,1);
 /*!40000 ALTER TABLE `interview_track_job` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -69,4 +69,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-27  3:10:10
+-- Dump completed on 2015-09-30 13:28:38

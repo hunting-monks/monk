@@ -36,7 +36,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$20000$CuMh1nNv2tag$PEaliU1Nt8B39awCLI0UnxxKuWfTvlWvUedESXVOD9A=','2015-09-26 18:30:33.467413',1,'admin','','','admin@monk.com',1,1,'2015-09-19 03:50:49.083143'),(2,'pbkdf2_sha256$20000$C9y4Lw4MCGON$hJaYuGdNdXKjXg8gUPZPmD8QIuCpf+t4Xi8a6JeBVwg=','2015-09-26 18:45:20.031780',0,'monk','','','',0,1,'2015-09-19 04:25:02.793017'),(3,'pbkdf2_sha256$20000$4BWBbjF2dqoK$Ru7A9/r26+qs24xsD+E93NNrVQCa+hgtTvvCTmzpx/I=','2015-09-26 18:33:46.659706',0,'interviewer','','','',0,1,'2015-09-26 18:31:11.356738');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$20000$CuMh1nNv2tag$PEaliU1Nt8B39awCLI0UnxxKuWfTvlWvUedESXVOD9A=','2015-09-30 03:41:02.490942',1,'admin','张','三','admin@monk.com',1,1,'2015-09-19 03:50:00.000000'),(2,'pbkdf2_sha256$20000$C9y4Lw4MCGON$hJaYuGdNdXKjXg8gUPZPmD8QIuCpf+t4Xi8a6JeBVwg=','2015-09-30 04:52:36.653525',0,'monk','五','王','ww@monk.com',0,1,'2015-09-19 04:25:00.000000'),(3,'pbkdf2_sha256$20000$4BWBbjF2dqoK$Ru7A9/r26+qs24xsD+E93NNrVQCa+hgtTvvCTmzpx/I=','2015-09-26 18:33:00.000000',0,'interviewer','四','李','ls@monk.com',0,1,'2015-09-26 18:31:00.000000'),(4,'pbkdf2_sha256$20000$bbzlXaggUXiq$LGvZTFtj1ne95gq+OhOkT7muQZ/oMV0QitAvTUY69tU=',NULL,0,'hm','Hans','Monk','hmgr@monk.com',0,1,'2015-09-30 03:44:00.000000');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-27  3:10:10
+-- Dump completed on 2015-09-30 13:28:38

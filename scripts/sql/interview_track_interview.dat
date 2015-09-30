@@ -25,8 +25,8 @@ DROP TABLE IF EXISTS `interview_track_interview`;
 CREATE TABLE `interview_track_interview` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category` int(11) NOT NULL,
-  `start_time` datetime(6) NOT NULL,
-  `end_time` datetime(6) NOT NULL,
+  `start_time` time(6) NOT NULL,
+  `end_time` time(6) NOT NULL,
   `status` int(11) NOT NULL,
   `comment` varchar(2000) NOT NULL,
   `deleted` tinyint(1) NOT NULL,
@@ -34,12 +34,13 @@ CREATE TABLE `interview_track_interview` (
   `updated_at` datetime(6) NOT NULL,
   `interviewer_id` int(11) NOT NULL,
   `case_id` int(11) NOT NULL,
+  `interview_date` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `interview_track_interview_cb0f7719` (`interviewer_id`),
   KEY `interview_track_interview_7f12ca67` (`case_id`),
   CONSTRAINT `i_case_id_7b2e23e093bfcdd6_fk_interview_track_applicationcase_id` FOREIGN KEY (`case_id`) REFERENCES `interview_track_applicationcase` (`id`),
   CONSTRAINT `interview_interviewer_id_720368cf62de7c15_fk_company_employee_id` FOREIGN KEY (`interviewer_id`) REFERENCES `company_employee` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,6 +49,7 @@ CREATE TABLE `interview_track_interview` (
 
 LOCK TABLES `interview_track_interview` WRITE;
 /*!40000 ALTER TABLE `interview_track_interview` DISABLE KEYS */;
+INSERT INTO `interview_track_interview` VALUES (1,2,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 18:59:05.953113','2015-09-29 18:59:05.953348',4,8,'0001-01-01'),(2,2,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 18:59:05.964799','2015-09-29 18:59:05.964997',5,8,'0001-01-01'),(3,3,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 18:59:05.969292','2015-09-29 18:59:05.969514',5,8,'0001-01-01'),(4,1,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 23:09:42.172103','2015-09-29 23:09:42.172144',5,9,'0001-01-01'),(5,2,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 23:09:42.174211','2015-09-29 23:09:42.174250',5,9,'0001-01-01'),(6,2,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 23:09:42.177757','2015-09-29 23:09:42.177797',5,9,'0001-01-01'),(7,1,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 23:13:36.607444','2015-09-29 23:13:36.607483',4,10,'0001-01-01'),(8,3,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 23:13:36.610548','2015-09-29 23:13:36.610650',5,10,'0001-01-01'),(9,2,'00:00:00.000000','00:00:00.000000',1,'',0,'2015-09-29 23:13:36.612276','2015-09-29 23:13:36.612316',5,10,'0001-01-01'),(10,2,'00:15:00.000000','00:45:00.000000',1,'',0,'2015-09-30 04:14:47.470034','2015-09-30 04:14:47.470072',5,11,'2015-09-02'),(11,2,'00:30:00.000000','01:00:00.000000',1,'',0,'2015-09-30 04:14:47.471566','2015-09-30 04:14:47.471604',4,11,'2015-09-09'),(12,2,'00:00:00.000000','00:45:00.000000',1,'',0,'2015-09-30 04:14:47.473112','2015-09-30 04:14:47.473211',5,11,'2015-09-23');
 /*!40000 ALTER TABLE `interview_track_interview` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-27  3:10:10
+-- Dump completed on 2015-09-30 13:28:38

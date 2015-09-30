@@ -30,12 +30,15 @@ CREATE TABLE `interview_track_applicationcase` (
   `deleted` tinyint(1) NOT NULL,
   `applicant_id` int(11) NOT NULL,
   `job_id` int(11) NOT NULL,
+  `creator_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `interview__applicant_id_6a71af202fdffcc0_fk_company_applicant_id` (`applicant_id`),
   KEY `interview_track_applicationcase_d697ea38` (`job_id`),
+  KEY `interview_track_applicationcase_3700153c` (`creator_id`),
   CONSTRAINT `interview__applicant_id_6a71af202fdffcc0_fk_company_applicant_id` FOREIGN KEY (`applicant_id`) REFERENCES `company_applicant` (`id`),
+  CONSTRAINT `interview_tra_creator_id_3faf01a2733cc024_fk_company_employee_id` FOREIGN KEY (`creator_id`) REFERENCES `company_employee` (`id`),
   CONSTRAINT `interview_trac_job_id_6f56c4e143daedf5_fk_interview_track_job_id` FOREIGN KEY (`job_id`) REFERENCES `interview_track_job` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +47,7 @@ CREATE TABLE `interview_track_applicationcase` (
 
 LOCK TABLES `interview_track_applicationcase` WRITE;
 /*!40000 ALTER TABLE `interview_track_applicationcase` DISABLE KEYS */;
+INSERT INTO `interview_track_applicationcase` VALUES (6,1,'2015-09-29 17:15:41.275405','2015-09-29 17:15:41.275587',0,1,5,1),(7,1,'2015-09-29 17:19:15.527429','2015-09-29 17:19:15.527619',0,4,5,1),(8,1,'2015-09-29 18:58:00.909450','2015-09-29 18:58:00.909498',0,10,6,1),(9,1,'2015-09-29 23:09:42.103658','2015-09-29 23:09:42.103703',0,8,5,1),(10,1,'2015-09-29 23:13:36.564070','2015-09-29 23:13:36.564126',0,8,6,1),(11,1,'2015-09-30 04:14:47.414931','2015-09-30 04:14:47.414983',0,4,7,4);
 /*!40000 ALTER TABLE `interview_track_applicationcase` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-27  3:10:10
+-- Dump completed on 2015-09-30 13:28:38

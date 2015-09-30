@@ -30,8 +30,9 @@ CREATE TABLE `company_role` (
   `deleted` tinyint(1) NOT NULL,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `company_role_name_1b1095b78fe80658_uniq` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +41,7 @@ CREATE TABLE `company_role` (
 
 LOCK TABLES `company_role` WRITE;
 /*!40000 ALTER TABLE `company_role` DISABLE KEYS */;
-INSERT INTO `company_role` VALUES (1,'Recruiter',7,8,0,'2015-09-23 03:40:03.225258','2015-09-24 17:37:38.840133'),(2,'Interviewer',7,4,0,'2015-09-24 17:38:01.223468','2015-09-24 17:38:01.223516');
+INSERT INTO `company_role` VALUES (1,'Recruiter',7,8,0,'2015-09-23 03:40:03.225258','2015-09-24 17:37:38.840133'),(2,'Interviewer',7,4,0,'2015-09-24 17:38:01.223468','2015-09-24 17:38:01.223516'),(3,'Hiring Manager',7,16,0,'2015-09-30 03:44:01.391178','2015-09-30 03:44:01.391228');
 /*!40000 ALTER TABLE `company_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-27  3:10:10
+-- Dump completed on 2015-09-30 13:28:38
