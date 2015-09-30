@@ -2,6 +2,7 @@ from django.forms import DateField
 from django.forms import ModelChoiceField
 from django.forms import ModelForm
 
+from company.models import ROLES_MAP
 from interview_track.models import ApplicationCase
 from interview_track.models import Interview
 from interview_track.models import InterviewScore
@@ -85,18 +86,20 @@ class JobForm(ModelForm):
         if not company:
             return
         self.fields['recruiter'] = ModelChoiceField(
-            queryset=Employee.objects.filter(company=company))
+            queryset=Employee.objects.filter(
+            company=company, role=ROLES_MAP['Recruiter']))
         self.fields['hiring_manager'] = ModelChoiceField(
-            queryset=Employee.objects.filter(company=company))
+            queryset=Employee.objects.filter(
+            company=company, role=ROLES_MAP['Hiring Manager']))
 
 
 class ApplicationCaseForm(ModelForm):
     class Meta:
         model = ApplicationCase
         fields = (
+            'creator',
             'applicant',
-            'job',
-            'creator')
+            'job')
 
     def __init__(self, *args, **kwargs):
         eid = kwargs.pop('eid', '')

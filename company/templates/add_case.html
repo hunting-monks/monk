@@ -1,0 +1,97 @@
+{% extends "base.html"%}
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% spaceless %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload.css' %}">
+    <link rel="stylesheet" href="{% static 'jQuery-File-Upload/css/jquery.fileupload-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.11.4/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-timepicker/jquery.timepicker.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'jquery-timepicker/jquery.timepicker.min.js' %}"></script>
+    <script>
+        $(function(){
+            for (var i = 0; i < 5; i++){
+                $("#id_form-" + i + "-interview_date").datepicker();
+        
+                $("#id_form-" + i + "-start_time").timepicker({ 'step': 15 });
+                $("#id_form-" + i + "-end_time").timepicker({ 'step': 15 });
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block navbar %}
+    {% include "navbar_recruiter.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% trans "Start an interview" %}</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                    
+                                <form action="{% url 'add_interview' %}" method="post"  enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <p>{{ form.non_field_errors }}</p>
+                                    <p>{{ form.errors }}</p>
+                                    <div class="form-group">
+                                        {{ form.applicant.errors }}
+                                        <label for="{{ form.applicant.id_for_label }}">{% trans "Applicant" %}</label>
+                                        {{ form.applicant }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.job.errors }}
+                                        <label for="{{ form.job.id_for_label }}">{% trans "Job" %}</label>
+                                        {{ form.job }}
+                                    </div>
+                                    {% for iform in iforms %}
+                                        <hr>
+                                        {{ iform.errors }}
+                                        <!-- {% cycle 'First' 'Second' 'Third' 'Fourth' 'Fifth' as label %} -->
+                                        <h4>{% blocktrans %}{{label}} Interview{% endblocktrans %}: </h4>
+                                        <div class="form-group">
+                                            {{ iform.category }}
+                                            {{ iform.interviewer }}
+                                            <input type="text" id="id_form-{{forloop.counter0}}-interview_date" maxlength="50" name="form-{{forloop.counter0}}-interview_date" type="text" placeholder='{% trans "Interview date" %}' />
+                                            <input id="id_form-{{forloop.counter0}}-start_time" type="text" class="time" name="form-{{forloop.counter0}}-start_time" placeholder="{% trans 'Start Time' %}"/>
+                                            <input id="id_form-{{forloop.counter0}}-end_time" type="text" class="time" name="form-{{forloop.counter0}}-end_time" placeholder="{% trans 'End Time' %}" />
+                                            <input id="id_form-{{forloop.counter0}}-case" type="hidden" name="form-{{forloop.counter0}}-case" value="0" />
+                                        </div>
+                                    {% endfor %}
+
+                                    <input type='hidden' id='id_form-TOTAL_FORMS' name='form-TOTAL_FORMS' value="3" />
+                                    <input type='hidden' id='id_form-INITIAL_FORMS' name='form-INITIAL_FORMS' value="0" />
+                                    <input type='hidden' id='id_form-MAX_NUM_FORMS' name='form-TOTAL_FORMSMAX_NUM_FORMS' value="" />
+                                    <input type='hidden' id='id_creator' name='creator' value="{{ eid }}" />
+                                    <input type="submit" value="Submit" class="btn btn-success" />
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+{% endblock %}
+
+{% block foot_scripts %}
+
+{% endblock %}
+
+{% endspaceless %}

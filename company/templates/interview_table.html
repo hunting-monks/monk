@@ -1,24 +1,25 @@
 {% load i18n %}
 
 <div class="dataTable_wrapper">
-    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+    <table class="table table-striped table-hover" id="dataTables-example">
         <thead>
             <tr>
-                <th>{% trans 'Case ID' %}</th>
-                <th>{% trans 'Job title' %}</th>
-                <th>{% trans 'Applicant' %}</th>
-                <th>{% trans 'Interviewers' %}</th>
+                <th>{% trans 'Interviewer' %}</th>
+                <th>{% trans 'Interview Date' %}</th>
+                <th>{% trans 'Start Time' %}</th>
+                <th>{% trans 'End Time' %}</th>
                 <th>{% trans 'Status' %}</th>
             </tr>
         </thead>
         <tbody>
             {% for int in interviews %}
-            <!-- tr class="odd gradeX">
-                <td class="center"><a href="{% url 'interviewer_detail' interviewer_id=int.id %}">{{int.last_name}} {{int.first_name}}</a></td>
-                <td class="center">{{int.title}}</td>
-                <td class="center">{{int.department}}</td>
-                <td class="center">{{int.email}}</td>
-            </tr-->
+            <tr class="odd gradeX">
+                <td class="center">{{int.interviewer.last_name}} {{int.interviewer.first_name}}</a></td>
+                <td class="center">{{int.interview_date}}</td>
+                <td class="center">{{int.start_time}}</td>
+                <td class="center">{{int.end_time}}</td>
+                <td class="center">{{int.status}}</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>

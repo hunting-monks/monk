@@ -1,5 +1,9 @@
+from functools import partial
+from functools import wraps
+
 from django.contrib.auth.decorators import login_required
 from django.core.files.uploadedfile import UploadedFile
+from django.forms.models import modelformset_factory
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
@@ -7,11 +11,15 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from common import utils
 from forms import ApplicantForm
 from forms import ApplicationCaseForm
 from forms import EmployeeForm
 from forms import JobForm
+from interview_track.models import ApplicationCase
+from interview_track.models import Interview
 from interview_track.models import Job
+from interview_track.forms import InterviewForm
 from logic import applicant
 from logic import employee
 from logic import job
@@ -119,7 +127,10 @@ def add_interviewers(request):
         if form.is_valid():
             try:
                 interviewer = form.save()
-                return render(request, 'interviewer_detail.html', {'interviewer': interviewer})
+                return render(
+                    request,
+                    'interviewer_detail.html',
+                    {'interviewer': interviewer})
             except Exception as ex:
                 print ex
     else:
@@ -148,34 +159,50 @@ def list_interviewers(request):
 @login_required
 def interviewer_detail(request, jobid):
     interviewer = Employee.objects.get(pk=jobid)
-    return render(request, 'interviewer_detail.html', {'interviewer': interviewer})
+    return render(
+        request,
+        'interviewer_detail.html',
+        {'interviewer': interviewer})
 
 
+MAX_NUM_INTERVIEW = 3
 '''functions for rendering interview case pages'''
 @login_required
-def add_interview(request):
+def add_case(request):
     emp = employee.get_employee_by_user(userid=request.user.id)
+    InterviewFormSet = modelformset_factory(
+        Interview,
+        form=utils.gen_class_with_kwargs(InterviewForm, eid=emp.id),
+        extra=MAX_NUM_INTERVIEW)
     if request.method == 'POST':
         form = ApplicationCaseForm(request.POST)
         if form.is_valid():
             try:
-                app = form.save()
-                return render(
-                    request,
-                    'add_interview_2.html',
-                    {'candi': app.applicant, 'job': app.job})
+                form = form.save()
+                iforms = InterviewFormSet(request.POST)
+                cnt = 0
+                for iform in iforms:
+                    iform.data['form-%d-case' % (cnt,)] = form.id
+                    cnt += 1
+                if iforms.is_valid():
+                    iforms = iforms.save()
+                    return render(
+                        request,
+                        'case_detail.html',
+                        {'case': form, 'interviews': iforms})
             except Exception as ex:
                 print ex
     else:
         form = ApplicationCaseForm()
+        iforms = InterviewFormSet(queryset=Interview.objects.none())
     return render(
         request,
-        'add_interview.html',
-        {'form': form, 'eid': emp.id})
+        'add_case.html',
+        {'eid': emp.id, 'form': form, 'iforms': iforms})
 
 
 @login_required
-def list_interviews(request):
+def list_cases(request):
     interviewers = []
     try:
         for j in employee.get_interviewers_by_recruiter(request.user.id):
@@ -190,7 +217,12 @@ def list_interviews(request):
 
 
 @login_required
-def interview_detail(request, jobid):
-    interviewer = Employee.objects.get(pk=jobid)
-    return render(request, 'interviewer_detail.html', {'interviewer': interviewer})
-    return
+def case_detail(request, case_id):
+    appcase = ApplicationCase.objects.get(pk=case_id)
+    interviews = Interview.objects.filter(case_id=appcase.id)
+    return render(
+        request,
+        'case_detail.html',
+        {'case': appcase,
+         'interviews': interviews})
+

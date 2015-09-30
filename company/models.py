@@ -1,9 +1,9 @@
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
 
-from datetime import datetime
+from common import utils
 
-# Create your models here.
 
 INDUSTRY_CATEGORIES = (
     (0, 'Unknown'),
@@ -11,15 +11,15 @@ INDUSTRY_CATEGORIES = (
     (2, 'Computer Hardware'),
     (3, 'Computer Software'),
     (4, 'Internet'))
+INDUSTRY_CATEGORIES_MAP = utils.list2dict_reverse(INDUSTRY_CATEGORIES)
 
-
-ROLE_ENUM = (
+ROLES = (
     (0, 'Unknown'),
     (1, 'Admin'),
     (1 << 2, 'Interviewer'),
-    (1 << 3, 'HR'),
+    (1 << 3, 'Recruiter'),
     (1 << 4, 'Hiring Manager'))
-
+ROLES_MAP = utils.list2dict_reverse(ROLES)
 
 SKILL_LEVEL = (
     (0, 'Unknown'),
@@ -28,59 +28,32 @@ SKILL_LEVEL = (
     (3, 'Senior'),
     (4, 'Principle'),
     (5, 'Distinguished'))
-
+SKILL_LEVEL_MAP = utils.list2dict_reverse(SKILL_LEVEL)
 
 APPLICANT_SOURCE = (
     (0, 'Unknown'),
     (1, 'Internal referral'),
     (2, 'Self submitted'),
     (3, 'Linkedin'))
-
-
-APPLICATION_STATUS = (
-    (1, 'Not started'),
-    (2, 'Phone screen scheduled'),
-    (3, 'Phone screen finished'),
-    (4, 'Onsite scheduled'),
-    (5, 'Onsite finished'),
-    (6, 'Offered'),
-    (7, 'Rejected'),
-    (8, 'On hold'))
-
-
-INTERVIEW_CATEGORIES = (
-    (1, 'Phone screen'),
-    (2, 'Onsite coding'),
-    (3, 'Onsite HR'),
-    (4, 'Onsite HM'))
-
-
-INTERVIEW_STATUS = (
-    (1, 'Scheduled'),
-    (2, 'Candidate Confirmed'),
-    (3, 'Interviewer Confirmed'),
-    (4, 'Passed'),
-    (5, 'Rejected'))
-
+APPLICANT_SOURCE_MAP = utils.list2dict_reverse(APPLICANT_SOURCE)
 
 SEX_CHOICES = (
     (0, 'U'),
     (1, 'M'),
-    (2, 'F'),
-)
-
+    (2, 'F'))
+SEX_CHOICES_MAP = utils.list2dict_reverse(SEX_CHOICES)
 
 EE_STATUS_CHOICES = (
     ('Ped', 'Pending'),
     ('Act', 'Active'),
-    ('Del', 'Deleted')
-)
+    ('Del', 'Deleted'))
+EE_STATUS_CHOICES_MAP = utils.list2dict_reverse(EE_STATUS_CHOICES)
 
 MARITAL_CHOICES = (
     ('U', 'Unknown'),
     ('S', 'Single'),
-    ('M', 'Married'),
-)
+    ('M', 'Married'))
+MARITAL_CHOICES_MAP = utils.list2dict_reverse(MARITAL_CHOICES)
 
 DEGREE_CHOICES = (
     (0, 'Unknown'),
@@ -88,6 +61,7 @@ DEGREE_CHOICES = (
     (2, 'BS'),
     (3, 'MS'),
     (4, 'PHD'))
+DEGREE_CHOICES_MAP = utils.list2dict_reverse(DEGREE_CHOICES)
 
 
 class Company(models.Model):
@@ -117,13 +91,14 @@ class Role(models.Model):
 
     name = models.CharField(max_length=30, unique=True)
     permission = models.BigIntegerField()
-    mask = models.BigIntegerField(choices=ROLE_ENUM)
+    mask = models.BigIntegerField(choices=ROLES)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.name
+
 
 class UserDetail(models.Model):
 
@@ -148,7 +123,7 @@ class Employee(models.Model):
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
-    email = models.CharField(max_length=254, blank=True, db_index=True, unique=True)
+    email = models.CharField(max_length=254, blank=True, unique=True)
     middleInitial = models.CharField(max_length=1, blank=True, default="")
     address = models.CharField(max_length=100, blank=True, default="")
     address2 = models.CharField(max_length=100, blank=True, default="")
@@ -183,7 +158,7 @@ class Applicant(models.Model):
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
-    email = models.EmailField(blank=True, db_index=True, unique=True)
+    email = models.EmailField(blank=True, unique=True)
     middleInitial = models.CharField(max_length=1, blank=True, default="")
     address = models.CharField(max_length=100, blank=True, default="")
     address2 = models.CharField(max_length=100, blank=True, default="")

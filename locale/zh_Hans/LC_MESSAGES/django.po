@@ -48,6 +48,9 @@ msgstr "候选人"
 msgid "Case ID"
 msgstr "序号"
 
+msgid "Category"
+msgstr "类别"
+
 msgid "Change password"
 msgstr "重置密码"
 
@@ -78,8 +81,14 @@ msgstr "工作经历"
 msgid "Expiration date"
 msgstr "截止日期"
 
+msgid "First Interview"
+msgstr "第一轮面试"
+
 msgid "First name"
 msgstr "名"
+
+msgid "Fourth Interview"
+msgstr "第四轮面试"
 
 msgid "Forgot your password?"
 msgstr "忘记密码？"
@@ -105,8 +114,14 @@ msgstr "职位名称"
 msgid "Job level"
 msgstr "职位级别"
 
+msgid "Job openings"
+msgstr "职位"
+
 msgid "Last name"
 msgstr "姓"
+
+msgid "Level"
+msgstr "级别"
 
 msgid "Log in"
 msgstr "登录"
@@ -127,6 +142,9 @@ msgstr "我的芒克"
 
 msgid "Not a member?"
 msgstr "还未注册？"
+
+msgid "Ongoing interviews"
+msgstr "未完成的面试"
 
 msgid "Password"
 msgstr "密码"
@@ -167,12 +185,20 @@ msgstr "记住密码"
 msgid "Reset it"
 msgstr "密码重置"
 
+msgid "Salary Range"
+msgstr "薪资范围"
+
 msgid "Salary range"
 msgstr "薪资范围"
+
+msgid "Sencond Interview"
+msgstr "第二轮面试"
 
 msgid "Scorecards"
 msgstr "面试纪录"
 
+msgid "Start an interview"
+msgstr "创建面试"
 msgid "Start Interviews"
 msgstr "创建面试"
 
@@ -184,6 +210,9 @@ msgstr "提交"
 
 msgid "Successfully logged out"
 msgstr "退出成功"
+
+msgid "Third Interview"
+msgstr "第三轮面试"
 
 msgid "Title"
 msgstr "职位"

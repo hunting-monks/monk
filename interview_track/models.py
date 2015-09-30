@@ -1,40 +1,16 @@
+from datetime import date
 from datetime import datetime
+from datetime import time
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 
+from common import utils
 from company.models import Applicant
 from company.models import Company
 from company.models import Employee
-
-
-INDUSTRY_CATEGORIES = (
-    (1, 'Accounting'),
-    (2, 'Computer Hardware'),
-    (3, 'Computer Software'),
-    (4, 'Internet'))
-
-
-ROLE_ENUM = (
-    (1, 'Admin'),
-    (1 << 2, 'Interviewer'),
-    (1 << 3, 'HR'),
-    (1 << 4, 'Hiring Manager'))
-
-
-SKILL_LEVEL = (
-    (1, 'Entry'),
-    (2, 'Junior'),
-    (3, 'Senior'),
-    (4, 'Veteran'),
-    (5, 'Principle'),
-    (6, 'Distinguished'))
-
-
-APPLICANT_SOURCE = (
-    (1, 'Internal referral'),
-    (2, 'Self submitted'),
-    (3, 'Linkedin'))
+from company.models import INDUSTRY_CATEGORIES
+from company.models import SKILL_LEVEL
 
 
 APPLICATION_STATUS = (
@@ -46,14 +22,15 @@ APPLICATION_STATUS = (
     (6, 'Offered'),
     (7, 'Rejected'),
     (8, 'On hold'))
-
+APPLICATION_STATUS_MAP = utils.list2dict_reverse(APPLICATION_STATUS)
 
 INTERVIEW_CATEGORIES = (
+    ('', 'Interview type'),
     (1, 'Phone screen'),
-    (2, 'Onsite coding'),
-    (3, 'Onsite HR'),
-    (4, 'Onsite HM'))
-
+    (2, 'Onsite'),
+    (3, 'Onsite with HR'),
+    (4, 'Onsite with HM'))
+INTERVIEW_CATEGORIES_MAP = utils.list2dict_reverse(INTERVIEW_CATEGORIES)
 
 INTERVIEW_STATUS = (
     (1, 'Scheduled'),
@@ -61,6 +38,7 @@ INTERVIEW_STATUS = (
     (3, 'Interviewer Confirmed'),
     (4, 'Passed'),
     (5, 'Rejected'))
+INTERVIEW_STATUS_MAP = utils.list2dict_reverse(INTERVIEW_STATUS)
 
 
 class Job(models.Model):
@@ -92,12 +70,16 @@ class ApplicationCase(models.Model):
 
     applicant = models.ForeignKey(Applicant)
     job = models.ForeignKey(Job)
-    status = models.IntegerField(choices=APPLICATION_STATUS)
+    status = models.IntegerField(choices=APPLICATION_STATUS, default=APPLICATION_STATUS_MAP['Not started'])
 
     creator = models.ForeignKey(Employee)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return "%d: %s, %s" % (
+            self.id, self.applicant.__unicode__(), self.job.__unicode__())
 
 
 class Interview(models.Model):
@@ -105,9 +87,10 @@ class Interview(models.Model):
     case = models.ForeignKey(ApplicationCase)
     interviewer = models.ForeignKey(Employee)
     category = models.IntegerField(choices=INTERVIEW_CATEGORIES)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-    status = models.IntegerField(choices=INTERVIEW_STATUS)
+    interview_date = models.DateField(default=date.min)
+    start_time = models.TimeField(default=time.min)
+    end_time = models.TimeField(default=time.min)
+    status = models.IntegerField(choices=INTERVIEW_STATUS, default=INTERVIEW_STATUS_MAP['Scheduled'])
     comment = models.CharField(max_length=2000, blank=True, default="")
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

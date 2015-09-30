@@ -2,16 +2,16 @@ from django.conf.urls import include, patterns
 from django.conf.urls import url
 
 from views import add_candidates
-from views import add_interview
+from views import add_case
 from views import add_interviewers
 from views import add_jobs
 from views import candidate_detail
 from views import dashboard
-from views import interview_detail
+from views import case_detail
 from views import interviewer_detail
 from views import job_detail
 from views import list_candidates
-from views import list_interviews
+from views import list_cases
 from views import list_interviewers
 from views import list_jobs
 
@@ -32,7 +32,7 @@ urlpatterns = patterns('',
     url(r'^interviewer_detail/(?P<interviewer_id>\w+)/', interviewer_detail, name='interviewer_detail'),
     url(r'^list_interviewers', list_interviewers, name='list_interviewers'),
 # interview pages
-    url(r'^add_interview', add_interview, name='add_interview'),
-    url(r'^interview_detail/(?P<case_id>\w+)/', interview_detail, name='interview_detail'),
-    url(r'^list_interviews', list_interviews, name='list_interviews'),
+    url(r'^add_case', add_case, name='add_case'),
+    url(r'^case_detail/(?P<case_id>\w+)/', case_detail, name='case_detail'),
+    url(r'^list_cases', list_cases, name='list_cases'),
 )

@@ -13,7 +13,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'company')
+    list_display = ('first_name', 'last_name', 'company', 'email')
     list_display_links = ('first_name',)
     ordering = ['first_name', 'last_name']
 
@@ -30,7 +30,7 @@ class UserDetailAdmin(admin.ModelAdmin):
 
 
 class ApplicantAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'current_company', 'current_title')
+    list_display = ('first_name', 'last_name', 'current_company', 'current_title', 'email')
     list_display_links = ('first_name',)
     ordering = ['first_name', 'last_name']
 
