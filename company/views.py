@@ -27,6 +27,7 @@ from logic import employee
 from logic import job
 from models import Applicant
 from models import Employee
+from models import DEGREE_CHOICES_DICT
 from models import INDUSTRY_CATEGORIES_DICT
 from models import SKILL_LEVEL_DICT
 
@@ -38,7 +39,10 @@ def dashboard(request):
     return render_to_response(
             'recruiter_home.html',
             {'cases': cases,
-             'jobs': jobs},
+             'jobs': jobs,
+             'status_dict': APPLICATION_STATUS_DICT,
+             'job_categories': INDUSTRY_CATEGORIES_DICT,
+             'skill_levels': SKILL_LEVEL_DICT},
             context_instance=RequestContext(request))
 
 
@@ -82,7 +86,11 @@ def add_candidates(request):
 @login_required
 def candidate_detail(request, cid):
     candidate = Applicant.objects.get(pk=cid)
-    return render(request, 'candidate_detail.html', {'candi': candidate})
+    return render(
+        request,
+        'candidate_detail.html',
+        {'candi': candidate,
+         'degrees': DEGREE_CHOICES_DICT})
 
 
 '''functions for rendering job pages'''

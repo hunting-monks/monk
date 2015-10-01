@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     # third party apps
     'django_extensions',
     'registration',
-    'sorl.thumbnail',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (

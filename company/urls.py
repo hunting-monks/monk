@@ -18,6 +18,8 @@ from views import list_jobs
 urlpatterns = patterns('',
 # dashboard
     url(r'^home', dashboard, name='recruiter_dashboard'),
+# API
+    url(r'api/', include("company.API.urls")),
 
 # cadidates pages
     url(r'^add_candidates', add_candidates, name='add_candidates'),

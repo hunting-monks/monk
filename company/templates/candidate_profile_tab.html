@@ -1,0 +1,40 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% load customtags %}
+
+<div class="tab-pane fade in active" id="profile">
+    <h2>{{candi.last_name}} {{candi.first_name}}</h2>
+    <hr>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">{% trans "Experience" %}</h3></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    {{candi.current_title}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    {{candi.current_company}}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">{% trans "Education" %}</h3></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    {% with degree=degrees|keyvalue:candi.degree %}{% trans degree %}{% endwith %} {{candi.graduate_school}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    {{candi.graduate_date}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-success" href="{{candi.resume}}">{% trans "View Resume" %}</a>
+</div>
