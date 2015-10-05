@@ -42,6 +42,9 @@ msgstr "候选人"
 msgid "Application cases"
 msgstr "面试列表"
 
+msgid "Application Case Detail"
+msgstr "面试详情"
+
 msgid "Area"
 msgstr "职位类别"
 
@@ -81,6 +84,9 @@ msgstr "查看详情"
 msgid "Education"
 msgstr "教育背景"
 
+msgid "End Time"
+msgstr "结束时间"
+
 msgid "Experience"
 msgstr "工作经历"
 
@@ -108,8 +114,20 @@ msgstr "最高学位"
 msgid "Hiring manager"
 msgstr "职位经理"
 
+msgid "Interviews"
+msgstr "面试"
+
+msgid "Interviewer"
+msgstr "面试官"
+
+msgid "Interview Date"
+msgstr "面试日期"
+
 msgid "Interviewers"
 msgstr "面试官"
+
+msgid "Job"
+msgstr "职位"
 
 msgid "Job description"
 msgstr "职位详情"
@@ -215,6 +233,9 @@ msgid "Start an interview"
 msgstr "创建面试"
 msgid "Start Interviews"
 msgstr "创建面试"
+
+msgid "Start Time"
+msgstr "开始时间"
 
 msgid "Status"
 msgstr "状态"

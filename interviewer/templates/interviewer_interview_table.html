@@ -10,16 +10,22 @@
                 <th>{% trans 'Start Time' %}</th>
                 <th>{% trans 'End Time' %}</th>
                 <th>{% trans 'Status' %}</th>
+                {% if pending == 1 %}
+                <th></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
             {% for int in interviews %}
             <tr class="odd gradeX">
-                <td class="center">{{int.interviewer.last_name}} {{int.interviewer.first_name}}</a></td>
+                <td class="center">{{int.interviewer.user.last_name}} {{int.interviewer.user.first_name}}</a></td>
                 <td class="center">{{int.interview_date}}</td>
                 <td class="center">{{int.start_time}}</td>
                 <td class="center">{{int.end_time}}</td>
                 <td class="center">{% with status=interview_status|keyvalue:int.status %}{% trans status %}{% endwith %}</td>
+                {% if pending == 1 %}
+                <td class="center"><a href="#">{% trans "Write Feedback" %}</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

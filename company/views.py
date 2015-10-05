@@ -21,6 +21,7 @@ from interview_track.logic import applicationcase
 from interview_track.models import ApplicationCase
 from interview_track.models import APPLICATION_STATUS_DICT
 from interview_track.models import Interview
+from interview_track.models import INTERVIEW_STATUS_DICT
 from interview_track.models import Job
 from logic import applicant
 from logic import employee
@@ -239,5 +240,6 @@ def case_detail(request, case_id):
         request,
         'case_detail.html',
         {'case': appcase,
-         'interviews': interviews})
+         'interviews': interviews,
+         'interview_status': INTERVIEW_STATUS_DICT})
 
