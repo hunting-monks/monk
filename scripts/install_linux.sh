@@ -1,9 +1,8 @@
 # prerequsites
-sudo apt-get install git python-virtualenv python-mysqldb tasksel openjdk-7-jre python-pip
+sudo apt-get install git python-virtualenv python-mysqldb tasksel openjdk-7-jre python-pip libjpeg-dev  mysql-server-5.6
 
 # mysql
 sudo apt-get update
-sudo tasksel install lamp-server
 sudo apt-get build-dep python-mysqldb
 
 #npm install -g ember-cli

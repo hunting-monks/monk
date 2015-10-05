@@ -5,7 +5,7 @@ Prerequsites
 Run the following to install all packages needed.
 
 ```
-script/install_unbuntu.sh
+. scripts/install_linux.sh
 pip install -r scripts/pymodules
 ```
 
@@ -35,7 +35,7 @@ In order to install Pillow on OS X later than 10.8, run the following,
 ```
 mysql -u root -p
 
-	>CREATE DATABASE monk CHARACTER SET utf8;;
+	>CREATE DATABASE monk CHARACTER SET utf8;
 	>CREATE USER 'monk'@'localhost' IDENTIFIED BY 'monk';
 	>GRANT ALL PRIVILEGES ON * . * TO 'monk'@'localhost'; FLUSH PRIVILEGES;
 ```
