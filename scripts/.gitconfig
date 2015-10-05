@@ -1,0 +1,28 @@
+[user]
+	name = Yudong Tan
+	email = yudong.tan@gmail.com
+[core]
+	editor = emacs
+[color]
+	ui = auto
+[diff]
+	external = /Users/ytan/bin/gitdiff.sh
+[alias]
+    unstage = reset HEAD --
+    br = branch
+    co = checkout
+    df = diff
+    dfc = diff --cached
+    st = status
+    cl = reset --hard HEAD --
+    cp = cherry-pick
+    last = log -1 HEAD
+    pt = format-patch --stdout HEAD^
+    showf = show --name-status
+#graphical log
+    glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+#short log
+    slog = log --pretty=format:'%H - %an, %ar : %s' --name-only
+#very short log
+    vslog = log --pretty=format:'%H - %an, %ar : %s'
+    vslog1 = log -n 1 --pretty=format:'%H - %an, %ar : %s'
