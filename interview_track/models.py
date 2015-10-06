@@ -100,11 +100,37 @@ class Interview(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+class ScoreCardTemplate(models.Model):
+    name = models.CharField(max_length=100, default="")
+    field1 = models.CharField(max_length=500, default="")
+    field2 = models.CharField(max_length=500, blank=True, default="")
+    field3 = models.CharField(max_length=500, blank=True, default="")
+    field4 = models.CharField(max_length=500, blank=True, default="")
+    field5 = models.CharField(max_length=500, blank=True, default="")
+    field6 = models.CharField(max_length=500, blank=True, default="")
+    field7 = models.CharField(max_length=500, blank=True, default="")
+    field8 = models.CharField(max_length=500, blank=True, default="")
+    field9 = models.CharField(max_length=500, blank=True, default="")
+    field10 = models.CharField(max_length=500, blank=True, default="")
+    deleted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class InterviewScore(models.Model):
 
     interview = models.ForeignKey(Interview)
-    evaluated_field = models.CharField(max_length=50, blank=True, default="")
-    score = models.IntegerField(blank=True, default=0)
+    template = models.ForeignKey(ScoreCardTemplate)
+    score1 = models.SmallIntegerField(default=0)
+    score2 = models.IntegerField(blank=True, default=0)
+    score3 = models.IntegerField(blank=True, default=0)
+    score4 = models.IntegerField(blank=True, default=0)
+    score5 = models.IntegerField(blank=True, default=0)
+    score6 = models.IntegerField(blank=True, default=0)
+    score7 = models.IntegerField(blank=True, default=0)
+    score8 = models.IntegerField(blank=True, default=0)
+    score9 = models.IntegerField(blank=True, default=0)
+    score10 = models.IntegerField(blank=True, default=0)
     comment = models.CharField(max_length=2000, blank=True, default="")
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

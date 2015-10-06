@@ -3,6 +3,7 @@ from models import ApplicationCase
 from models import Interview
 from models import InterviewScore
 from models import Job
+from models import ScoreCardTemplate
 
 
 class ApplicationCaseAdmin(admin.ModelAdmin):
@@ -17,10 +18,16 @@ class InterviewAdmin(admin.ModelAdmin):
     ordering = ['case', 'interviewer']
 
 
+class ScoreCardTemplateAdmin(admin.ModelAdmin):
+    list_display = ('name', 'field1', 'field2', 'field3', 'field4', 'field5')
+    list_display_links = ('name',)
+    ordering = ['name', ]
+
+
 class InterviewScoreAdmin(admin.ModelAdmin):
-    list_display = ('interview', 'evaluated_field', 'score')
+    list_display = ('interview', 'template', 'score1', 'score2', 'score3', 'score4', 'score5')
     list_display_links = ('interview',)
-    ordering = ['interview', 'evaluated_field']
+    ordering = ['interview', 'template']
 
 
 class JobAdmin(admin.ModelAdmin):
@@ -32,5 +39,6 @@ admin.site.register(ApplicationCase, ApplicationCaseAdmin)
 admin.site.register(Interview, InterviewAdmin)
 admin.site.register(InterviewScore, InterviewScoreAdmin)
 admin.site.register(Job, JobAdmin)
+admin.site.register(ScoreCardTemplate, ScoreCardTemplateAdmin)
 
 # Register your models here.
