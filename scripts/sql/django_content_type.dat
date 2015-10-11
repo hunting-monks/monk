@@ -28,7 +28,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_45f3b1d93ec8c61c_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(16,'company','applicant'),(12,'company','company'),(15,'company','employee'),(13,'company','role'),(14,'company','userdetail'),(6,'contenttypes','contenttype'),(19,'interview_track','applicationcase'),(10,'interview_track','interview'),(11,'interview_track','interviewscore'),(8,'interview_track','job'),(17,'registration','registrationprofile'),(7,'sessions','session'),(5,'sites','site'),(18,'thumbnail','kvstore');
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(16,'company','applicant'),(12,'company','company'),(15,'company','employee'),(13,'company','role'),(14,'company','userdetail'),(6,'contenttypes','contenttype'),(19,'interview_track','applicationcase'),(10,'interview_track','interview'),(11,'interview_track','interviewscore'),(8,'interview_track','job'),(20,'interview_track','scorecardtemplate'),(17,'registration','registrationprofile'),(7,'sessions','session'),(5,'sites','site'),(18,'thumbnail','kvstore');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-30 13:28:38
+-- Dump completed on 2015-10-11 17:49:26
