@@ -69,6 +69,22 @@ mysql -u root -p
 	username: interviewer password: monk -- this is an interviewer account
 ```
 
+Setup webserver
+===================
+1, Start/reload uwsgi
+```
+	uwsgi --ini config/uwsgi.ini
+	kill -HUP `cat /tmp/monk.pid`
+```
+
+2, start/restart nginx
+
+nginx config file is in /etc/nginx/site-enables
+
+```
+	sudo service nginx start (or restart)
+```
+
 Misc Notes
 ===================
 Create models
