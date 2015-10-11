@@ -13,7 +13,7 @@ class ApplicationCaseAdmin(admin.ModelAdmin):
 
 
 class InterviewAdmin(admin.ModelAdmin):
-    list_display = ('case', 'interviewer')
+    list_display = ('case', 'interviewer', 'template',)
     list_display_links = ('case',)
     ordering = ['case', 'interviewer']
 
@@ -25,9 +25,9 @@ class ScoreCardTemplateAdmin(admin.ModelAdmin):
 
 
 class InterviewScoreAdmin(admin.ModelAdmin):
-    list_display = ('interview', 'template', 'score1', 'score2', 'score3', 'score4', 'score5')
+    list_display = ('interview', 'score1', 'score2', 'score3', 'score4', 'score5')
     list_display_links = ('interview',)
-    ordering = ['interview', 'template']
+    ordering = ['interview', ]
 
 
 class JobAdmin(admin.ModelAdmin):

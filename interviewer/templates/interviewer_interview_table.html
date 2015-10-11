@@ -24,10 +24,24 @@
                 <td class="center">{{int.end_time}}</td>
                 <td class="center">{% with status=interview_status|keyvalue:int.status %}{% trans status %}{% endwith %}</td>
                 {% if pending == 1 %}
-                <td class="center"><a href="#">{% trans "Write Feedback" %}</a></td>
+                <td class="center"><a href="#feed_back_modal" data-toggle="modal">{% trans "Write Feedback" %}</a></td>
                 {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
+
+<div class="modal fade" id="feed_back_modal">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3>{% trans "Write Feedback" %}</h3>
+  </div>
+  <div class="modal-body">
+    <p>Test Modal</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary">Save Changes</a>
+  </div>
 </div>

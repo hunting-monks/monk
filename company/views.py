@@ -17,12 +17,16 @@ from forms import ApplicationCaseForm
 from forms import EmployeeForm
 from forms import JobForm
 from interview_track.forms import InterviewForm
+from interview_track.forms import InterviewScoreForm
+from interview_track.forms import ScoreCardTemplateForm
 from interview_track.logic import applicationcase
 from interview_track.models import ApplicationCase
 from interview_track.models import APPLICATION_STATUS_DICT
 from interview_track.models import Interview
 from interview_track.models import INTERVIEW_STATUS_DICT
+from interview_track.models import InterviewScore
 from interview_track.models import Job
+from interview_track.models import ScoreCardTemplate
 from logic import applicant
 from logic import employee
 from logic import job
@@ -207,7 +211,7 @@ def add_case(request):
                     return render(
                         request,
                         'case_detail.html',
-                        {'case': form, 'interviews': iforms})
+                        {'case': form, 'interviews': [f.cleaned_data for f in iforms]})
             except Exception as ex:
                 print ex
     else:
@@ -243,3 +247,33 @@ def case_detail(request, case_id):
          'interviews': interviews,
          'interview_status': INTERVIEW_STATUS_DICT})
 
+
+@login_required
+def add_scorecard_template(request):
+    emp = employee.get_employee_by_user(userid=request.user.id)
+    if request.method == 'POST':
+        form = ScoreCardTemplateForm(request.POST)
+        if form.is_valid():
+            try:
+                sct = form.save()
+                return render(
+                    request,
+                    'scorecard_template_detail.html',
+                    {'sct': model_to_dict(sct)})
+            except Exception as ex:
+                print ex
+    else:
+        form = ScoreCardTemplateForm()
+    return render(
+        request,
+        'add_scorecard_template.html',
+        {'form': form, 'eid': emp.id})
+
+
+@login_required
+def scorecard_template_detail(request, template_id):
+    template = ScoreCardTemplate.objects.get(pk=template_id)
+    return render(
+        request,
+        'scorecard_template_detail.html',
+        {'template': template})

@@ -5,6 +5,7 @@ from views import add_candidates
 from views import add_case
 from views import add_interviewers
 from views import add_jobs
+from views import add_scorecard_template
 from views import candidate_detail
 from views import dashboard
 from views import case_detail
@@ -14,6 +15,8 @@ from views import list_candidates
 from views import list_cases
 from views import list_interviewers
 from views import list_jobs
+from views import scorecard_template_detail
+
 
 urlpatterns = patterns('',
 # dashboard
@@ -37,4 +40,7 @@ urlpatterns = patterns('',
     url(r'^add_case', add_case, name='add_case'),
     url(r'^case_detail/(?P<case_id>\w+)/', case_detail, name='case_detail'),
     url(r'^list_cases', list_cases, name='list_cases'),
+# scorecard pages
+    url(r'^add_scorecard_template', add_scorecard_template, name='add_scorecard_template'),
+    url(r'^scorecard_template_detail', scorecard_template_detail, name='scorecard_template_detail'),
 )

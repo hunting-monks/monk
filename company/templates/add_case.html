@@ -70,6 +70,7 @@
                                             <input type="text" id="id_form-{{forloop.counter0}}-interview_date" maxlength="50" name="form-{{forloop.counter0}}-interview_date" type="text" placeholder='{% trans "Interview date" %}' />
                                             <input id="id_form-{{forloop.counter0}}-start_time" type="text" class="time" name="form-{{forloop.counter0}}-start_time" placeholder="{% trans 'Start Time' %}"/>
                                             <input id="id_form-{{forloop.counter0}}-end_time" type="text" class="time" name="form-{{forloop.counter0}}-end_time" placeholder="{% trans 'End Time' %}" />
+                                            {{ iform.template }}
                                             <input id="id_form-{{forloop.counter0}}-case" type="hidden" name="form-{{forloop.counter0}}-case" value="0" />
                                         </div>
                                     {% endfor %}

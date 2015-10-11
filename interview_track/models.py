@@ -85,9 +85,33 @@ class ApplicationCase(models.Model):
             self.id, self.applicant.__unicode__(), self.job.__unicode__())
 
 
+class ScoreCardTemplate(models.Model):
+    name = models.CharField(max_length=100, unique=True, default="")
+    field1 = models.CharField(max_length=500, default="")
+    field2 = models.CharField(max_length=500, blank=True, default="")
+    field3 = models.CharField(max_length=500, blank=True, default="")
+    field4 = models.CharField(max_length=500, blank=True, default="")
+    field5 = models.CharField(max_length=500, blank=True, default="")
+    field6 = models.CharField(max_length=500, blank=True, default="")
+    field7 = models.CharField(max_length=500, blank=True, default="")
+    field8 = models.CharField(max_length=500, blank=True, default="")
+    field9 = models.CharField(max_length=500, blank=True, default="")
+    field10 = models.CharField(max_length=500, blank=True, default="")
+    created_by = models.ForeignKey(Employee)
+    deleted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%d: %s" % (self.id, self.name)
+
+
 class Interview(models.Model):
+    class meta:
+        unique_together = (("case", "interviewer"))
 
     case = models.ForeignKey(ApplicationCase)
+    template = models.ForeignKey(ScoreCardTemplate)
     interviewer = models.ForeignKey(Employee)
     category = models.IntegerField(choices=INTERVIEW_CATEGORIES)
     interview_date = models.DateField(default=date.min)
@@ -99,40 +123,28 @@ class Interview(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
-class ScoreCardTemplate(models.Model):
-    name = models.CharField(max_length=100, default="")
-    field1 = models.CharField(max_length=500, default="")
-    field2 = models.CharField(max_length=500, blank=True, default="")
-    field3 = models.CharField(max_length=500, blank=True, default="")
-    field4 = models.CharField(max_length=500, blank=True, default="")
-    field5 = models.CharField(max_length=500, blank=True, default="")
-    field6 = models.CharField(max_length=500, blank=True, default="")
-    field7 = models.CharField(max_length=500, blank=True, default="")
-    field8 = models.CharField(max_length=500, blank=True, default="")
-    field9 = models.CharField(max_length=500, blank=True, default="")
-    field10 = models.CharField(max_length=500, blank=True, default="")
-    deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    def __unicode__(self):
+        return "%s: %s" % (self.case.__unicode__(), self.interviewer.__unicode__())
 
 
 class InterviewScore(models.Model):
 
-    interview = models.ForeignKey(Interview)
-    template = models.ForeignKey(ScoreCardTemplate)
+    interview = models.OneToOneField(Interview)
     score1 = models.SmallIntegerField(default=0)
-    score2 = models.IntegerField(blank=True, default=0)
-    score3 = models.IntegerField(blank=True, default=0)
-    score4 = models.IntegerField(blank=True, default=0)
-    score5 = models.IntegerField(blank=True, default=0)
-    score6 = models.IntegerField(blank=True, default=0)
-    score7 = models.IntegerField(blank=True, default=0)
-    score8 = models.IntegerField(blank=True, default=0)
-    score9 = models.IntegerField(blank=True, default=0)
-    score10 = models.IntegerField(blank=True, default=0)
+    score2 = models.SmallIntegerField(blank=True, default=0)
+    score3 = models.SmallIntegerField(blank=True, default=0)
+    score4 = models.SmallIntegerField(blank=True, default=0)
+    score5 = models.SmallIntegerField(blank=True, default=0)
+    score6 = models.SmallIntegerField(blank=True, default=0)
+    score7 = models.SmallIntegerField(blank=True, default=0)
+    score8 = models.SmallIntegerField(blank=True, default=0)
+    score9 = models.SmallIntegerField(blank=True, default=0)
+    score10 = models.SmallIntegerField(blank=True, default=0)
     comment = models.CharField(max_length=2000, blank=True, default="")
+    scored_by = models.ForeignKey(Employee)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __unicode(self):
+        return "%s: %s" % (self.interview.__unicode__(), self.scored_by.__unicode__())

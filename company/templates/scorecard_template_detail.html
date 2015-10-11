@@ -1,0 +1,40 @@
+{% extends "base.html"%}
+{% load i18n %}
+{% load customtags %}
+
+{% spaceless %}
+
+{% block navbar %}
+    {% include "navbar_recruiter.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrapper">
+        
+        <div class="row">
+            <br>
+            <div class="col-lg-12">
+                <h2>{{sct.name}}</h2>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {% with ''|center:10 as range %}
+                        {% for _ in range %}
+                            {% with "field"|addstr:forloop.counter as fname%}
+                                {% with sct|keyvalue:fname as field %}
+                                    {% if field %}
+                                        <p>{{field}}</p>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+{% endblock %}
+
+{% endspaceless %}
