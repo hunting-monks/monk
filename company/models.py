@@ -2,8 +2,14 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth.models import User, Permission
 from django.db import models
+try:
+    from django.contrib.sites.shortcuts import get_current_site
+except ImportError:
+    from django.contrib.sites.models import get_current_site
 
 from common import utils
+from registration.models import RegistrationProfile
+from django.contrib.sites.models import Site
 
 
 INDUSTRY_CATEGORIES = (
@@ -71,6 +77,7 @@ DEGREE_CHOICES = (
     (4, 'PHD'))
 DEGREE_CHOICES_MAP = utils.list2map(DEGREE_CHOICES)
 DEGREE_CHOICES_DICT = utils.list2dict(DEGREE_CHOICES)
+
 
 
 class Company(models.Model):
@@ -162,7 +169,7 @@ class Employee(models.Model):
     company = models.ForeignKey('Company', related_name='employees')
 
     # lets not use role now, we can use group/permission instead.
-    # role = models.ForeignKey('Role', related_name='employee', null=True)
+    role = models.ForeignKey('Role', related_name='employee', null=True)
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
@@ -195,6 +202,13 @@ class Employee(models.Model):
 
     def __unicode__(self):
         return "%s %s - %s" % (self.first_name, self.last_name, self.company.name)
+
+    @property
+    def isRegisteredEmployee(self):
+        if not self.user:
+            return False
+        username = self.user.username
+        return not (not '@' in username and len(username) == 30)
 
 
 class Applicant(models.Model):
