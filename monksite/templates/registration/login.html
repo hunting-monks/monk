@@ -27,24 +27,32 @@
                         <h3 class="panel-title">{% trans "Please Sign In" %}</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" method="post" action="">
+                        <form method="post" action="">
                             {% csrf_token %}
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="{% trans 'Username' %}" id="id_username" name="username" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="{% trans 'Password' %}" id="id_password" name="password" type="password" value="">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="{% trans 'Remember Me' %}">Remember Me
-                                    </label>
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="{% trans 'Login' %}" />
-                                <input type="hidden" name="next" value="/" />
-                            </fieldset>
+                            <div class="form-group{%if form.username.errors%} error{%endif%}">
+                                <input class="form-control" autofocus="" id="id_username" name="username" type="email" placeholder="{% trans 'Username' %}">
+                                {% if form.username.errors %}
+                                    <div class="error-text">{{form.username.errors|join:"<br/>"|default:"This field is required"}}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group{%if form.password.errors%} error{%endif%}">
+                                <input class="form-control" id="id_password" name="password" type="password" placeholder="{% trans 'Password' %}">
+                                {% if form.password.errors %}
+                                    <div class="error-text">{{form.password.errors|join:"<br/>"|default:"This field is required"}}</div>
+                                {% endif %}
+							</div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" type="checkbox" value="{% trans 'Remember Me' %}">Remember Me
+                                </label>
+                            </div>
+
+
+                            <input type="submit" class="btn btn-lg btn-success btn-block" value="{% trans 'Login' %}" />
+                            <input type="hidden" name="next" value="/" />
+
                         </form>
                     </div>
                 </div>
