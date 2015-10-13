@@ -1,35 +1,30 @@
 from functools import partial
 from functools import wraps
 
-from django.conf import settings
-try:
-    from django.contrib.sites.shortcuts import get_current_site
-except ImportError:
-    from django.contrib.sites.models import get_current_site
-
-from django.template.loader import render_to_string
-from django.contrib.sites.models import Site
-from tools.emails import sendRendedEmail
-
 from django.contrib.auth.decorators import login_required
+from django.core.files.uploadedfile import UploadedFile
 from django.forms.models import modelformset_factory
 from django.forms.models import model_to_dict
+from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.contrib.auth.models import User
+
 from common import utils
 from forms import ApplicantForm
 from forms import ApplicationCaseForm
 from forms import EmployeeForm
 from forms import JobForm
 from interview_track.forms import InterviewForm
+from interview_track.forms import InterviewScoreForm
 from interview_track.forms import ScoreCardTemplateForm
 from interview_track.logic import applicationcase
 from interview_track.models import ApplicationCase
 from interview_track.models import APPLICATION_STATUS_DICT
 from interview_track.models import Interview
 from interview_track.models import INTERVIEW_STATUS_DICT
+from interview_track.models import InterviewScore
 from interview_track.models import Job
 from interview_track.models import ScoreCardTemplate
 from logic import applicant
@@ -41,12 +36,6 @@ from models import DEGREE_CHOICES_DICT
 from models import INDUSTRY_CATEGORIES_DICT
 from models import SKILL_LEVEL_DICT
 
-
-import random
-random.seed(None)
-def id_generator(size=30):
-	idchars = "1234567890abcdefghijklmnopqrstuvwxyz"
-	return ''.join(random.choice(idchars) for _ in range(size))
 
 @login_required
 def dashboard(request):
@@ -150,29 +139,6 @@ def job_detail(request, jobid):
     job = Job.objects.get(pk=jobid)
     return render(request, 'job_detail.html', {'job': job})
 
-def completeEmployeeRegistration(employee):
-    username = id_generator()
-    fake_user = User.objects.create_user(username, password=username, email=username)
-    employee.user = fake_user
-    employee.save()
-
-    current_site = Site.objects.get_current()
-    ctx_dict = {}
-    ctx_dict.update({
-        'user': fake_user,
-        'activation_key': username,
-        'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
-        'site': current_site
-    })
-
-    subject = render_to_string('registration/activation_email_subject.txt', ctx_dict)
-    # Email subject *must not* contain newlines
-    subject = ''.join(subject.splitlines())
-    from_email = getattr(settings, 'REGISTRATION_DEFAULT_FROM_EMAIL')
-    to_email_list = [employee.email]
-    text_content = render_to_string('registration/activation_email.txt', ctx_dict)
-    sendRendedEmail(subject, from_email, to_email_list, text_content, html_content=None)
-
 
 '''functions for rendering interviewer pages'''
 @login_required
@@ -183,7 +149,6 @@ def add_interviewers(request):
         if form.is_valid():
             try:
                 interviewer = form.save()
-                completeEmployeeRegistration(interviewer)
                 return render(
                     request,
                     'interviewer_detail.html',

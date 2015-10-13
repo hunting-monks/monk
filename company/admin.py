@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.models import Permission
 from models import Company
 from models import Employee
 from models import Role
@@ -35,15 +34,11 @@ class ApplicantAdmin(admin.ModelAdmin):
     list_display_links = ('first_name',)
     ordering = ['first_name', 'last_name']
 
-class PermissionAdmin(admin.ModelAdmin):
-    model = Permission
-    fields = ['name', 'content_type', 'codename']
 
 admin.site.register(Applicant, ApplicantAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Role, RoleAdmin)
 admin.site.register(UserDetail, UserDetailAdmin)
-admin.site.register(Permission, PermissionAdmin)
 
 # Register your models here.

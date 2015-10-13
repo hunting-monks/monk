@@ -35,13 +35,6 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = (
-    # main app
-    'accounts',
-    'interview_track',
-    'company',
-    'interviewer',
-    'monksite',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -49,6 +42,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # main app
+    'interview_track',
+    'company',
+    'interviewer',
+    'monksite',
 
     # third party apps
     'django_extensions',
@@ -76,7 +75,7 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_LOADERS = (
 	'django.template.loaders.filesystem.Loader',
-	'django.template.loaders.app_directories.Loader',
+	# 'django.template.loaders.app_directories.Loader',
 )
 
 TEMPLATES = [
@@ -154,23 +153,9 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
-# Email Related
-EMAIL_USE_TLS = False
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-#SERVER_EMAIL = 'devt@monk.com'
-#DEFAULT_FROM_EMAIL = 'support@monk.com'
-
 
 # Registration related
 REGISTRATION_OPEN = True
-ACCOUNT_ACTIVATION_DAYS = 180  # One-week activation window
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 
-URL_PREFIX = "http://localhost:8000"
-
-
-REGISTRATION_DEFAULT_FROM_EMAIL = "admin@monk.com"
