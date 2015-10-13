@@ -1,8 +1,7 @@
 from django.conf import settings
 import logging
 from django.shortcuts import render
-from registration.views import RegistrationView as BaseRegistrationView, ActivationView as BaseActivationView
-from registration.models import RegistrationProfile
+from registration.views import RegistrationView as BaseRegistrationView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from registration import signals

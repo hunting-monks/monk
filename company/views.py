@@ -9,7 +9,7 @@ except ImportError:
 
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
-from tools.emails import sendRendedEmail
+from common.emails import sendRendedEmail
 
 from django.contrib.auth.decorators import login_required
 from django.forms.models import modelformset_factory
