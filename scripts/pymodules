@@ -1,6 +1,7 @@
 Django==1.8.3
 MySQL-python==1.2.5
 django-registration-redux==1.2
+django-extensions==1.5.6
 wheel==0.24.0
 Pillow
 django-filter
