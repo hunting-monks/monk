@@ -12,29 +12,35 @@
        </button>
        <a class="navbar-brand" href="/">{% trans "Monk Hunting" %}</a>
    </div>
-               
-   <ul class="nav navbar-top-links navbar-right">
-       <li class="dropdown">
-           <p>{% trans "Welcome" %}, {{request.user.last_name}} {{request.user.first_name}}</p>
-       </li>
-       <!-- /.dropdown -->
-       <li class="dropdown">
-           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-               <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-           </a>
-           <ul class="dropdown-menu dropdown-user">
-               <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-               </li>
-               <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-               </li>
-               <li class="divider"></li>
-               <li><a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-               </li>
-           </ul>
-           <!-- /.dropdown-user -->
-       </li>
-       <!-- /.dropdown -->
-   </ul>
+
+    <ul class="nav navbar-top-links navbar-right">
+        {% if user.is_anonymous %}
+            <!-- todo -->
+        {% else %}
+            <li class="dropdown">
+                <p>{% trans "Welcome" %}, {{request.user.employee.first_name}}</p>
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                   <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+               </a>
+               <ul class="dropdown-menu dropdown-user">
+                   <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                   </li>
+                   <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                   </li>
+                   <li class="divider"></li>
+                   <li><a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                   </li>
+               </ul>
+               <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        {% endif %}
+    </ul>
+
+
 <!-- /.navbar-top-links -->
 
 {% block sidebar %}
