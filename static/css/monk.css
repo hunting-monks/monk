@@ -7,3 +7,9 @@
     color: #d50000;
     text-align: left;
 }
+
+#login-form .helpLink {
+    width: 100%;
+    max-width: 430px;
+}
+

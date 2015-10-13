@@ -26,7 +26,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">{% trans "Please Sign In" %}</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" id="login-form">
                         <form method="post" action="">
                             {% csrf_token %}
                             <div class="form-group{%if form.username.errors%} error{%endif%}">
@@ -49,9 +49,18 @@
                                 </label>
                             </div>
 
-
                             <input type="submit" class="btn btn-lg btn-success btn-block" value="{% trans 'Login' %}" />
+                            <div><a href="/accounts/password/reset">Forgot Your Password? </a></div>
+                            <br>
+                            <div>
+                                <span> Register A New Company ?
+                                <a href="/accounts/register">Join now</a>
+                                </span>
+                            </div>
+
                             <input type="hidden" name="next" value="/" />
+
+
 
                         </form>
                     </div>
