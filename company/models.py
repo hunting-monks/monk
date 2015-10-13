@@ -21,14 +21,21 @@ INDUSTRY_CATEGORIES = (
 INDUSTRY_CATEGORIES_MAP = utils.list2map(INDUSTRY_CATEGORIES)
 INDUSTRY_CATEGORIES_DICT = utils.list2dict(INDUSTRY_CATEGORIES)
 
-ROLES = (
-    (0, 'Unknown'),
-    (1, 'Admin'),
-    (1 << 2, 'Interviewer'),
-    (1 << 3, 'Recruiter'),
-    (1 << 4, 'Hiring Manager'))
-ROLES_MAP = utils.list2map(ROLES)
-ROLES_DICT = utils.list2dict(ROLES)
+class Roles:
+    UNKNOWN = 0
+    ADMIN = 1
+    INTERVIEWER = 4
+    RECRUITER = 8
+    HIRING_MANAGER = 16
+
+ROLES_CHOICES = (
+    (Roles.UNKNOWN, 'Unknown'),
+    (Roles.ADMIN, 'Admin'),
+    (Roles.INTERVIEWER, 'Interviewer'),
+    (Roles.RECRUITER, 'Recruiter'),
+    (Roles.HIRING_MANAGER, 'Hiring Manager'))
+ROLES_MAP = utils.list2map(ROLES_CHOICES)
+ROLES_DICT = utils.list2dict(ROLES_CHOICES)
 
 SKILL_LEVEL = (
     (0, 'Unknown'),
@@ -79,7 +86,6 @@ DEGREE_CHOICES_MAP = utils.list2map(DEGREE_CHOICES)
 DEGREE_CHOICES_DICT = utils.list2dict(DEGREE_CHOICES)
 
 
-
 class Company(models.Model):
     name = models.CharField(verbose_name='Company Name', max_length=200, db_index=True,)
     businessDescription = models.CharField(verbose_name='Business Description', max_length=20, blank=True)
@@ -110,8 +116,6 @@ class Company(models.Model):
         company.size = size
         company.save()
 
-        # TODO: add role/permission
-
         user.first_name, user.last_name = 'Admin', 'Monk'
         user.save()
         company.administrators.add(user)
@@ -122,6 +126,7 @@ class Company(models.Model):
                                 first_name=user.first_name,
                                 last_name=user.last_name,
                                 email=user.email,
+                                role=Role.get_admin_role()
                                 )
         return company
 
@@ -131,10 +136,9 @@ class Company(models.Model):
 
 
 class Role(models.Model):
-
     name = models.CharField(max_length=30, unique=True)
     permission = models.BigIntegerField()
-    mask = models.BigIntegerField(choices=ROLES)
+    mask = models.BigIntegerField(choices=ROLES_CHOICES)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -143,9 +147,30 @@ class Role(models.Model):
         return self.name
 
     @classmethod
-    def create_admin_role(cls):
-        role = Role(name='admin')
-        # TODO: other props.
+    def get_admin_role(cls):
+        role, _ = Role.objects.get_or_create(
+            name='admin',
+            permission=Roles.ADMIN,
+            mask=Roles.ADMIN,
+		)
+        return role
+
+    @classmethod
+    def get_recruiter_role(cls):
+        role, _ = Role.objects.get_or_create(
+            name='recruiter',
+            permission=Roles.RECRUITER,
+            mask=Roles.RECRUITER,
+		)
+        return role
+
+    @classmethod
+    def get_interviewer_role(cls):
+        role, _ = Role.objects.get_or_create(
+            name='interviewer',
+            permission=Roles.INTERVIEWER,
+            mask=Roles.INTERVIEWER,
+		)
         return role
 
 class UserDetail(models.Model):

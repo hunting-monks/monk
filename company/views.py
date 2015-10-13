@@ -35,11 +35,8 @@ from interview_track.models import ScoreCardTemplate
 from logic import applicant
 from logic import employee
 from logic import job
-from models import Applicant
-from models import Employee
-from models import DEGREE_CHOICES_DICT
-from models import INDUSTRY_CATEGORIES_DICT
-from models import SKILL_LEVEL_DICT
+from models import Applicant, Employee, Roles
+from models import DEGREE_CHOICES_DICT, INDUSTRY_CATEGORIES_DICT, SKILL_LEVEL_DICT
 
 
 import random
@@ -183,6 +180,9 @@ def add_interviewers(request):
         if form.is_valid():
             try:
                 interviewer = form.save()
+                # set role, and send registartion invite.
+                interviewer.role = Roles.INTERVIEWER
+                interviewer.save()
                 completeEmployeeRegistration(interviewer)
                 return render(
                     request,
