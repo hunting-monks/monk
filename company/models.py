@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.db import models
 
 from common import utils
@@ -75,14 +76,15 @@ DEGREE_CHOICES_DICT = utils.list2dict(DEGREE_CHOICES)
 class Company(models.Model):
     name = models.CharField(verbose_name='Company Name', max_length=200, db_index=True,)
     businessDescription = models.CharField(verbose_name='Business Description', max_length=20, blank=True)
-    area = models.IntegerField(choices=INDUSTRY_CATEGORIES)
+    area = models.IntegerField(choices=INDUSTRY_CATEGORIES, blank=True, default=0)
     email = models.EmailField(blank=True)
     phone = models.CharField(max_length=20)
     address = models.CharField(verbose_name='Address', max_length=50, blank=True)
     address2 = models.CharField(max_length=50, blank=True)
     zipcode = models.CharField(verbose_name='Zip', max_length=10, blank=True)
-    city = models.CharField(verbose_name='City', max_length=50)
-    province = models.CharField(verbose_name='Province', max_length=20)
+    city = models.CharField(verbose_name='City', max_length=50, blank=True)
+    size = models.IntegerField(verbose_name='Size', default=1)
+    province = models.CharField(verbose_name='Province', max_length=20, blank=True)
     state = models.CharField(verbose_name='State', max_length=2, blank=True)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -90,6 +92,32 @@ class Company(models.Model):
 
     administrators = models.ManyToManyField(User, related_name='companies')
     administrator = models.OneToOneField(User, related_name='company')
+
+    @classmethod
+    def register_company(cls, user, name, zipCode, phone, size):
+        company = Company()
+        company.administrator = user
+        company.name = name
+        company.zip = zipCode
+        company.phone = phone
+        company.size = size
+        company.save()
+
+        # TODO: add role/permission
+
+        user.first_name, user.last_name = 'Admin', 'Monk'
+        user.save()
+        company.administrators.add(user)
+
+        # create a employee obj for the admin
+        Employee.objects.create(company=company,
+                                user=user,
+                                first_name=user.first_name,
+                                last_name=user.last_name,
+                                email=user.email,
+                                )
+        return company
+
 
     def __unicode__(self):
         return self.name
@@ -107,6 +135,11 @@ class Role(models.Model):
     def __unicode__(self):
         return self.name
 
+    @classmethod
+    def create_admin_role(cls):
+        role = Role(name='admin')
+        # TODO: other props.
+        return role
 
 class UserDetail(models.Model):
 
@@ -127,7 +160,9 @@ class Employee(models.Model):
 
     user = models.OneToOneField(User, null=True)
     company = models.ForeignKey('Company', related_name='employees')
-    role = models.ForeignKey(Role)
+
+    # lets not use role now, we can use group/permission instead.
+    # role = models.ForeignKey('Role', related_name='employee', null=True)
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
@@ -155,6 +190,8 @@ class Employee(models.Model):
     deleted = models.BooleanField(blank=True, default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    isRegistered = models.BooleanField(blank=True, default=False)
 
     def __unicode__(self):
         return "%s %s - %s" % (self.first_name, self.last_name, self.company.name)
