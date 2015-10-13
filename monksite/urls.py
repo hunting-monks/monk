@@ -22,12 +22,11 @@ from views import static_view
 import settings
 
 urlpatterns = [
+    # account management
+	url(r'^accounts/', include('accounts.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
-# account management
-    url(r'^accounts/logout', 'django.contrib.auth.views.logout',
-        {'next_page': '/accounts/login'},
-        name="logout"),
-    url(r'^accounts/', include('registration.backends.default.urls')),
+
 # recruiter pages
     url(r'^recruiter/', include("company.urls")),
 # interviewer pages
