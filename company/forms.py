@@ -11,7 +11,7 @@ from logic import applicant
 from logic import job
 from models import Applicant
 from models import Employee
-from models import Role
+from models import Role, Roles
 
 
 class ApplicantForm(ModelForm):
@@ -55,7 +55,7 @@ class EmployeeForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EmployeeForm, self).__init__(*args, **kwargs)
-        self.fields['role'] = ModelChoiceField(queryset=Role.objects.all())
+        self.fields['role'] = ModelChoiceField(queryset=Role.objects.filter(mask__in=(Roles.INTERVIEWER, Roles.RECRUITER)))
 
     def clean_photo(self):
         data = self.cleaned_data['photo']
