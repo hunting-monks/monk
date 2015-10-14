@@ -37,6 +37,14 @@ ROLES_CHOICES = (
 ROLES_MAP = utils.list2map(ROLES_CHOICES)
 ROLES_DICT = utils.list2dict(ROLES_CHOICES)
 
+class Perms:
+    READ = 'r'
+    WRITE = 'w'
+PERMS_CHOICES = (
+    (Perms.READ, 'r'),
+    (Perms.WRITE, 'w'),
+)
+
 SKILL_LEVEL = (
     (0, 'Unknown'),
     (1, 'Entry'),
@@ -130,6 +138,15 @@ class Company(models.Model):
                                 )
         return company
 
+    @classmethod
+    def inRequest(cls, request):
+        return cls.inUser(request.user)
+
+    @classmethod
+    def inUser(cls, user):
+        if not user.is_authenticated():
+            raise Company.DoesNotExist()
+        return user.employee.company
 
     def __unicode__(self):
         return self.name
@@ -137,8 +154,8 @@ class Company(models.Model):
 
 class Role(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    permission = models.BigIntegerField()
-    mask = models.BigIntegerField(choices=ROLES_CHOICES)
+    permission = models.CharField(max_length=10, choices=ROLES_CHOICES)
+    mask = models.BigIntegerField(choices=PERMS_CHOICES)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -150,7 +167,7 @@ class Role(models.Model):
     def get_admin_role(cls):
         role, _ = Role.objects.get_or_create(
             name='admin',
-            permission=Roles.ADMIN,
+            permission=Perms.WRITE,
             mask=Roles.ADMIN,
 		)
         return role
@@ -159,7 +176,7 @@ class Role(models.Model):
     def get_recruiter_role(cls):
         role, _ = Role.objects.get_or_create(
             name='recruiter',
-            permission=Roles.RECRUITER,
+            permission=Perms.WRITE,
             mask=Roles.RECRUITER,
 		)
         return role
@@ -168,21 +185,10 @@ class Role(models.Model):
     def get_interviewer_role(cls):
         role, _ = Role.objects.get_or_create(
             name='interviewer',
-            permission=Roles.INTERVIEWER,
+            permission=Perms.WRITE,
             mask=Roles.INTERVIEWER,
 		)
         return role
-
-class UserDetail(models.Model):
-
-    user = models.ForeignKey(User)
-    company = models.ForeignKey(Company)
-    role = models.ForeignKey(Role)
-    phone = models.CharField(max_length=20)
-    deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
 
 class Employee(models.Model):
     class Meta:
@@ -228,12 +234,30 @@ class Employee(models.Model):
     def __unicode__(self):
         return "%s %s - %s" % (self.first_name, self.last_name, self.company.name)
 
+    @classmethod
+    def inRequest(cls, request):
+        return cls.inUser(request.user)
+
+    @classmethod
+    def inUser(cls, user):
+        if not user.is_authenticated():
+            raise Company.DoesNotExist()
+        return user.employee
+
     @property
     def isRegisteredEmployee(self):
         if not self.user:
             return False
         username = self.user.username
         return not (not '@' in username and len(username) == 30)
+
+    @property
+    def isRecruiter(self):
+        return self.role.mask in (Roles.RECRUITER, Roles.ADMIN)
+
+    @property
+    def isInterviewer(self):
+        return self.role.mask in (Roles.INTERVIEWER)
 
 
 class Applicant(models.Model):

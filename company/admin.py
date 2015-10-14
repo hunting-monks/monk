@@ -3,7 +3,6 @@ from django.contrib.auth.models import Permission
 from models import Company
 from models import Employee
 from models import Role
-from models import UserDetail
 from models import Applicant
 
 
@@ -25,11 +24,6 @@ class RoleAdmin(admin.ModelAdmin):
     ordering = ['name', ]
 
 
-class UserDetailAdmin(admin.ModelAdmin):
-    list_display = ('user',)
-    list_display_links = ('user',)
-
-
 class ApplicantAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'current_company', 'current_title', 'email')
     list_display_links = ('first_name',)
@@ -43,7 +37,6 @@ admin.site.register(Applicant, ApplicantAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Role, RoleAdmin)
-admin.site.register(UserDetail, UserDetailAdmin)
 admin.site.register(Permission, PermissionAdmin)
 
 # Register your models here.

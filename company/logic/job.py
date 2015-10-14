@@ -1,5 +1,4 @@
 from company.models import Employee
-from company.models import UserDetail
 from interview_track.models import Job
 
 
