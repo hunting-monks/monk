@@ -1,6 +1,3 @@
-from functools import partial
-from functools import wraps
-
 from django.conf import settings
 try:
     from django.contrib.sites.shortcuts import get_current_site
@@ -18,7 +15,10 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
+from django.views.generic import ListView
+
 from common import utils
+from common.authorizations import AccessAuthorizationMixin
 from forms import ApplicantForm
 from forms import ApplicationCaseForm
 from forms import EmployeeForm
@@ -35,7 +35,7 @@ from interview_track.models import ScoreCardTemplate
 from logic import applicant
 from logic import employee
 from logic import job
-from models import Applicant, Employee, Role
+from models import Applicant, Employee, Role, Company, Roles
 from models import DEGREE_CHOICES_DICT, INDUSTRY_CATEGORIES_DICT, SKILL_LEVEL_DICT
 
 
@@ -214,8 +214,8 @@ def list_interviewers(request):
 
 
 @login_required
-def interviewer_detail(request, jobid):
-    interviewer = Employee.objects.get(pk=jobid)
+def interviewer_detail(request, interviewer_id):
+    interviewer = Employee.objects.get(pk=interviewer_id)
     return render(
         request,
         'interviewer_detail.html',
@@ -312,3 +312,13 @@ def scorecard_template_detail(request, template_id):
         request,
         'scorecard_template_detail.html',
         {'template': template})
+
+
+class InterviewerListView(AccessAuthorizationMixin, ListView):
+    required_roles = (Roles.ADMIN, Roles.RECRUITER, Roles.INTERVIEWER, )
+    template_name = 'list_interviewers.html'
+    context_object_name = 'interviewers'
+
+    def get_queryset(self):
+        company = Company.inRequest(self.request)
+        return company.recruiters

@@ -19,9 +19,13 @@
     <script src="{% static 'dist/js/sb-admin-2.js' %}"></script>
 
     <script src="{% static 'jquery-ui-1.11.4/jquery-ui.js' %}"></script>
-        <script src="{% static 'bootstrap/js/modal.js' %}"></script>
+    <script src="{% static 'bootstrap/js/modal.js' %}"></script>
+
+    <script src="{% static 'js/dutils.js' %}"></script>
+    <script src="{% static 'js/dutils.conf.urls.js' %}"></script>
     
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+    {% endblock %}
 
     <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap/dist/css/bootstrap-theme.css' %}" rel="stylesheet">
@@ -32,6 +36,7 @@
     <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 
     <link href="{% static 'css/monk.css' %}" rel="stylesheet">
+
 
     {% block extra_css %}{% endblock %}
 

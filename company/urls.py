@@ -13,7 +13,7 @@ from views import interviewer_detail
 from views import job_detail
 from views import list_candidates
 from views import list_cases
-from views import list_interviewers
+from views import InterviewerListView
 from views import list_jobs
 from views import scorecard_template_detail
 
@@ -35,7 +35,7 @@ urlpatterns = patterns('',
 # interviewer pages
     url(r'^add_interviewers', add_interviewers, name='add_interviewers'),
     url(r'^interviewer_detail/(?P<interviewer_id>\w+)/', interviewer_detail, name='interviewer_detail'),
-    url(r'^list_interviewers', list_interviewers, name='list_interviewers'),
+    url(r'^list_interviewers', InterviewerListView.as_view(), name='list_interviewers'),
 # interview pages
     url(r'^add_case', add_case, name='add_case'),
     url(r'^case_detail/(?P<case_id>\w+)/', case_detail, name='case_detail'),
