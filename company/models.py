@@ -70,10 +70,14 @@ SEX_CHOICES = (
 SEX_CHOICES_MAP = utils.list2map(SEX_CHOICES)
 SEX_CHOICES_DICT = utils.list2dict(SEX_CHOICES)
 
+class EEStatus:
+    PED = 'Ped'
+    ACT = 'Act'
+    DEL = 'Del'
 EE_STATUS_CHOICES = (
-    ('Ped', 'Pending'),
-    ('Act', 'Active'),
-    ('Del', 'Deleted'))
+    (EEStatus.PED, 'Pending'),
+    (EEStatus.ACT, 'Active'),
+    (EEStatus.DEL, 'Deleted'))
 EE_STATUS_CHOICES_MAP = utils.list2map(EE_STATUS_CHOICES)
 EE_STATUS_CHOICES_DICT = utils.list2dict(EE_STATUS_CHOICES)
 
@@ -147,6 +151,19 @@ class Company(models.Model):
         if not user.is_authenticated():
             raise Company.DoesNotExist()
         return user.employee.company
+
+    @property
+    def interviewers(self):
+        return Employee.objects.filter(company=self,
+                                       status=EEStatus.ACT,
+                                       role__mask__in=(Roles.INTERVIEWER, ))
+
+    @property
+    def recruiters(self):
+        return Employee.objects.filter(company=self,
+                                       status=EEStatus.ACT,
+                                       role__mask__in=(Roles.RECRUITER, ))
+
 
     def __unicode__(self):
         return self.name
