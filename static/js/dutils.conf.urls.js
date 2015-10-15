@@ -7,6 +7,6 @@ dutils.conf.urls = {
     "host": "/newsletter/host",
 
     "interviewer_list": "/recruiter/list_interviewers/",
-    "add_interviewers": "/recruiter/add_interviewers/",
+    "add_employees": "/recruiter/add_employees/",
     "interviewer_detail": "/recruiter/interviewer_detail/<interviewer_id>/",
 }

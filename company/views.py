@@ -181,8 +181,6 @@ def add_interviewers(request):
             try:
                 interviewer = form.save()
                 # set role, and send registartion invite.
-                interviewer.role = Role.get_interviewer_role()
-                interviewer.save()
                 completeEmployeeRegistration(interviewer)
                 return render(
                     request,
@@ -194,7 +192,7 @@ def add_interviewers(request):
         form = EmployeeForm()
     return render(
         request,
-        'add_interviewer.html',
+        'add_employee.html',
         {'form': form, 'cid': emp.company.id})
 
 
@@ -212,10 +210,17 @@ def list_interviewers(request):
             {'interviewers': interviewers},
             context_instance=RequestContext(request))
 
-
 @login_required
 def interviewer_detail(request, interviewer_id):
     interviewer = Employee.objects.get(pk=interviewer_id)
+    return render(
+        request,
+        'interviewer_detail.html',
+        {'interviewer': interviewer})
+
+@login_required
+def recruiter_detail(request, recruiter_id):
+    interviewer = Employee.objects.get(pk=recruiter_id)
     return render(
         request,
         'interviewer_detail.html',
@@ -314,30 +319,41 @@ def scorecard_template_detail(request, template_id):
         {'template': template})
 
 
+class RecruiterListView(AccessAuthorizationMixin, ListView):
+    required_roles = (Roles.ADMIN, Roles.RECRUITER, )
+    template_name = 'list_recruiters.html'
+    context_object_name = 'persons'
+
+    def get_queryset(self):
+        company = Company.inRequest(self.request)
+        return company.recruiters
+
+
 class InterviewerListView(AccessAuthorizationMixin, ListView):
     required_roles = (Roles.ADMIN, Roles.RECRUITER, Roles.INTERVIEWER, )
     template_name = 'list_interviewers.html'
-    context_object_name = 'interviewers'
+    context_object_name = 'persons'
 
     def get_queryset(self):
         company = Company.inRequest(self.request)
         return company.interviewers
 
-class InterviewerCreate(AccessAuthorizationMixin, CreateView):
+
+class EmployeeCreate(AccessAuthorizationMixin, CreateView):
+    required_roles = (Roles.ADMIN, Roles.RECRUITER, )
     model = Employee
-    template_name = 'add_interviewer.html'
+    template_name = 'add_employee.html'
     form_class = EmployeeForm
 
     def form_valid(self, form):
-        interviewer = form.save()
-
+        employee = form.save()
         # send registartion invite.
-        completeEmployeeRegistration(interviewer)
-        self.success_url = '/recruiter/interviewer_detail/%d/' % interviewer.id
-        return super(InterviewerCreate, self).form_valid(form)
+        completeEmployeeRegistration(employee)
+        self.success_url = '/recruiter/interviewer_detail/%d/' % employee.id
+        return super(EmployeeCreate, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(InterviewerCreate, self).get_context_data(**kwargs)
+        context = super(EmployeeCreate, self).get_context_data(**kwargs)
         cid = Company.inRequest(self.request).id
         context['cid'] = cid
         return context
