@@ -321,8 +321,7 @@ class InterviewerListView(AccessAuthorizationMixin, ListView):
 
     def get_queryset(self):
         company = Company.inRequest(self.request)
-        return company.recruiters
-
+        return company.interviewers
 
 class InterviewerCreate(AccessAuthorizationMixin, CreateView):
     model = Employee

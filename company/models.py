@@ -170,7 +170,7 @@ class Company(models.Model):
 
 
 class Role(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30)
     permission = models.CharField(max_length=10, choices=ROLES_CHOICES)
     mask = models.BigIntegerField(choices=PERMS_CHOICES)
     deleted = models.BooleanField(default=False)
@@ -206,6 +206,12 @@ class Role(models.Model):
             mask=Roles.INTERVIEWER,
 		)
         return role
+
+    class Meta:
+        unique_together = (
+            ("name", "permission", "mask", )
+        )
+
 
 class Employee(models.Model):
     class Meta:
