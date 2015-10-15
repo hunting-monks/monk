@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 from common import utils
 from common.authorizations import AccessAuthorizationMixin
@@ -322,3 +322,24 @@ class InterviewerListView(AccessAuthorizationMixin, ListView):
     def get_queryset(self):
         company = Company.inRequest(self.request)
         return company.recruiters
+
+
+class InterviewerCreate(AccessAuthorizationMixin, CreateView):
+    model = Employee
+    template_name = 'add_interviewer.html'
+    form_class = EmployeeForm
+
+    def form_valid(self, form):
+        interviewer = form.save()
+
+        # send registartion invite.
+        completeEmployeeRegistration(interviewer)
+        self.success_url = '/recruiter/interviewer_detail/%d/' % interviewer.id
+        return super(InterviewerCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(InterviewerCreate, self).get_context_data(**kwargs)
+        cid = Company.inRequest(self.request).id
+        context['cid'] = cid
+        return context
+

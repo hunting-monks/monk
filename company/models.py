@@ -213,11 +213,11 @@ class Employee(models.Model):
             ("user",)
         )
 
-    user = models.OneToOneField(User, null=True)
+    user = models.OneToOneField(User, null=False)
     company = models.ForeignKey('Company', related_name='employees')
 
     # lets not use role now, we can use group/permission instead.
-    role = models.ForeignKey('Role', related_name='employee', null=True)
+    role = models.ForeignKey('Role', related_name='employees', null=True)
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
