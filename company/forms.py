@@ -2,10 +2,8 @@ from django.forms import DateField
 from django.forms import ModelChoiceField
 from django.forms import ModelForm
 
-from company.models import ROLES_MAP
 from interview_track.models import ApplicationCase
-from interview_track.models import Interview
-from interview_track.models import InterviewScore
+from django import forms
 from interview_track.models import Job
 from logic import applicant
 from logic import job
@@ -55,7 +53,10 @@ class EmployeeForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EmployeeForm, self).__init__(*args, **kwargs)
-        self.fields['role'] = ModelChoiceField(queryset=Role.objects.filter(mask__in=(Roles.INTERVIEWER, Roles.RECRUITER)))
+        self.fields['role'] = ModelChoiceField(
+            queryset=Role.objects.filter(mask__in=(Roles.INTERVIEWER, Roles.RECRUITER)),
+            widget=forms.Select(attrs={'id':'id_role', 'class':'form-control margin-bottom'})
+        )
 
     def clean_photo(self):
         data = self.cleaned_data['photo']

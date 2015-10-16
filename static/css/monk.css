@@ -13,3 +13,11 @@
     max-width: 430px;
 }
 
+.modal-dialog {
+  width: 700px;
+}
+
+
+.margin-bottom {
+    margin-bottom:15px;
+}

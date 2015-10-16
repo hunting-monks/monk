@@ -1,0 +1,73 @@
+
+{% load i18n %}
+{% load static from staticfiles %}
+
+    <div class="row">
+        <div class="col-lg-10 col-md-offset-1">
+            <h1 class="page-header">{% trans "Update Employee" %}</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 col-md-offset-1">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-lg-10 col-md-offset-1">
+                        <form action="{% url 'update_employee' object.id %}" method="post"  enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>{{ form.non_field_errors }}</p>
+                            <p>{{ form.errors }}</p>
+                            <div class="form-group">
+                                <label for="id_last_name" class="control-label col-md-3">Last Name</label>
+                                <div class="col-md-9">
+                                <input class="form-control margin-bottom" id="id_last_name" maxlength="50" name="last_name" type="text" placeholder='{% trans "Last name" %}' value={{ object.last_name }} />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_first_name" class="control-label col-md-3">First Name</label>
+                                <div class="col-md-9">
+                                <input class="form-control margin-bottom" id="id_first_name" maxlength="50" name="first_name" type="text" placeholder='{% trans "First name" %}' value={{ object.first_name }} />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_title" class="control-label col-md-3">Title</label>
+                                <div class="col-md-9">
+                                <input class="form-control margin-bottom" id="id_title" maxlength="50" name="title" type="text" placeholder='{% trans "Title" %}' value={{ object.title }} />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_department" class="control-label col-md-3">Department</label>
+                                <div class="col-md-9">
+                                <input class="form-control margin-bottom" id="id_department" maxlength="50" name="department" type="text" placeholder='{% trans "Department" %}' value={{ object.department }}  />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_email" class="control-label col-md-3">Email</label>
+                                <div class="col-md-9">
+                                <input class="form-control margin-bottom" id="id_email" maxlength="50" name="email" type="text" placeholder='{% trans "Email" %}' value={{ object.email }}  />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.role.errors }}
+                                <label for="{{ form.role.id_for_label }}" class="control-label col-md-3 margin-bottom">{% trans "Role" %}</label>
+                                <div class="col-md-9">
+                                {{ form.role }}
+                                </div>
+                            </div>
+
+                            <input type='hidden' id='id_company' name='company' value="{{ cid }}" />
+                            <br>
+                            <input type="submit" value="Submit" class="btn btn-success" />
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

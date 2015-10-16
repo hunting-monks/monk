@@ -12,7 +12,7 @@ from views import interviewer_detail, recruiter_detail
 from views import job_detail
 from views import list_candidates
 from views import list_cases
-from views import InterviewerListView, EmployeeCreate, RecruiterListView
+from views import InterviewerListView, EmployeeCreate, EmployeeUpdate, RecruiterListView
 from views import list_jobs
 from views import scorecard_template_detail
 
@@ -38,6 +38,8 @@ urlpatterns = patterns('',
     url(r'^recruiter_detail/(?P<recruiter_id>\w+)/', recruiter_detail, name='recruiter_detail'),
     url(r'^list_interviewers', InterviewerListView.as_view(), name='list_interviewers'),
     url(r'^list_recruiters', RecruiterListView.as_view(), name='list_recruiters'),
+
+    url(r'^update_employee/(?P<employee_id>\w+)/', EmployeeUpdate.as_view(), name='update_employee'),
 # interview pages
     url(r'^add_case', add_case, name='add_case'),
     url(r'^case_detail/(?P<case_id>\w+)/', case_detail, name='case_detail'),

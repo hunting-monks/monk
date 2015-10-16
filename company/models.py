@@ -73,10 +73,12 @@ SEX_CHOICES_DICT = utils.list2dict(SEX_CHOICES)
 class EEStatus:
     PED = 'Ped'
     ACT = 'Act'
+    INA = 'Ina'
     DEL = 'Del'
 EE_STATUS_CHOICES = (
     (EEStatus.PED, 'Pending'),
     (EEStatus.ACT, 'Active'),
+    (EEStatus.INA, 'Inactive'),
     (EEStatus.DEL, 'Deleted'))
 EE_STATUS_CHOICES_MAP = utils.list2map(EE_STATUS_CHOICES)
 EE_STATUS_CHOICES_DICT = utils.list2dict(EE_STATUS_CHOICES)
@@ -155,14 +157,20 @@ class Company(models.Model):
     @property
     def interviewers(self):
         return Employee.objects.filter(company=self,
-                                       status=EEStatus.ACT,
                                        role__mask__in=(Roles.INTERVIEWER, ))
 
     @property
     def recruiters(self):
         return Employee.objects.filter(company=self,
-                                       status=EEStatus.ACT,
                                        role__mask__in=(Roles.RECRUITER, ))
+
+    @property
+    def activeInterviewers(self):
+        return self.interviewers.filter(status=EEStatus.ACT)
+
+    @property
+    def activeRecruiters(self):
+        return self.recruiters.filter(status=EEStatus.ACT)
 
 
     def __unicode__(self):
@@ -227,7 +235,7 @@ class Employee(models.Model):
 
     first_name = models.CharField(max_length=50, db_index=True)
     last_name = models.CharField(max_length=50, db_index=True)
-    email = models.CharField(max_length=254, blank=True, unique=True)
+    email = models.CharField(max_length=254, db_index=True, unique=True)
     middleInitial = models.CharField(max_length=1, blank=True, default="")
     address = models.CharField(max_length=100, blank=True, default="")
     address2 = models.CharField(max_length=100, blank=True, default="")
@@ -246,7 +254,7 @@ class Employee(models.Model):
     title = models.CharField(max_length=254, blank=True, default="")
     department = models.CharField(max_length=128, default="")
 
-    status = models.CharField(max_length=3, choices=EE_STATUS_CHOICES, default='Act')  # Active, LOA, Terminated
+    status = models.CharField(max_length=3, choices=EE_STATUS_CHOICES, default='Ina')  # Active, LOA, Terminated
     photo = models.CharField(max_length=255, blank=True, default="")
     deleted = models.BooleanField(blank=True, default=False)
     created_at = models.DateTimeField(auto_now_add=True)

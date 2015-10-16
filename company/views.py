@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 
 from common import utils
 from common.authorizations import AccessAuthorizationMixin
@@ -35,7 +35,7 @@ from interview_track.models import ScoreCardTemplate
 from logic import applicant
 from logic import employee
 from logic import job
-from models import Applicant, Employee, Role, Company, Roles
+from models import Applicant, Employee, Company, Roles, EEStatus
 from models import DEGREE_CHOICES_DICT, INDUSTRY_CATEGORIES_DICT, SKILL_LEVEL_DICT
 
 
@@ -151,6 +151,7 @@ def completeEmployeeRegistration(employee):
     username = id_generator()
     fake_user = User.objects.create_user(username, password=username, email=username)
     employee.user = fake_user
+    employee.status = EEStatus.INA
     employee.save()
 
     current_site = Site.objects.get_current()
@@ -349,11 +350,32 @@ class EmployeeCreate(AccessAuthorizationMixin, CreateView):
         employee = form.save()
         # send registartion invite.
         completeEmployeeRegistration(employee)
-        self.success_url = '/recruiter/interviewer_detail/%d/' % employee.id
+        self.success_url = '/recruiter/list_interviewers/'
         return super(EmployeeCreate, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(EmployeeCreate, self).get_context_data(**kwargs)
+        cid = Company.inRequest(self.request).id
+        context['cid'] = cid
+        return context
+
+from common.modals import AjaxTemplateMixin
+class EmployeeUpdate(AccessAuthorizationMixin, AjaxTemplateMixin, UpdateView):
+    required_roles = (Roles.ADMIN, Roles.RECRUITER, )
+    template_name = 'update_employee.html'
+    form_class = EmployeeForm
+
+    def get_object(self, queryset=None):
+        obj = Employee.objects.get(id=self.kwargs['employee_id'])
+        return obj
+
+    def form_valid(self, form):
+        employee = form.save()
+        self.success_url = '/recruiter/list_interviewers/'
+        return super(EmployeeUpdate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeUpdate, self).get_context_data(**kwargs)
         cid = Company.inRequest(self.request).id
         context['cid'] = cid
         return context

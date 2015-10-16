@@ -9,4 +9,5 @@ dutils.conf.urls = {
     "interviewer_list": "/recruiter/list_interviewers/",
     "add_employees": "/recruiter/add_employees/",
     "interviewer_detail": "/recruiter/interviewer_detail/<interviewer_id>/",
+    "update_employee": "/recruiter/update_employee/<interviewer_id>/",
 }
